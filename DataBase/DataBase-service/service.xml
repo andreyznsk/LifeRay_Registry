@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.3.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_3_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="DataBase">
+	<namespace>My</namespace>
+
+	<!--===========================Employee entity====================================-->
+	<entity local-service="true" name="Employee" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="Prson_id" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="LastName" type="String" />
+		<column name="FirstName" type="String" />
+		<column name="Patronymic" type="String" />
+		<column name="Date_of_birth" type="Date" />
+		<column name="Date_of_start_work" type="Date" />
+		<column name="WorkNumber" type="long" />
+		<column name="Position_Id" type="long" />
+		<column name="HomeNumber" type="long" />
+		<column name="Bank_id" type="long" />
+		<column name="IsArchive" type="long" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="Prson_id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Prson_id" return-type="Collection">
+			<finder-column name="Prson_id" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+	<!--===========================Bank Entity=====================================-->
+	<entity local-service="true" name="Bank" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="Bank_id" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="BankName" type="String" />
+		<column name="Bic" type="long" />
+		<column name="Address" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="Bank_id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="BankName" return-type="Collection">
+			<finder-column name="BankName" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+	<!--=========================Position entity======================================-->
+	<entity local-service="true" name="Positions" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="Positions_id" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="Position_name" type="String" />
+		<column name="is_Archive" type="long" />
+		<column name="Salary" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="Positions_id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Positions_id" return-type="Collection">
+			<finder-column name="Positions_id" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+</service-builder>

@@ -1,0 +1,10 @@
+Bundle-Name: DataBase-api
+Bundle-SymbolicName: DataBase.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	DataBase.exception,\
+	DataBase.model,\
+	DataBase.service,\
+	DataBase.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../DataBase-service/service.xml

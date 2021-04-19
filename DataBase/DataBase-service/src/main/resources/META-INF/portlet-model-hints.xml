@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="DataBase.model.Bank">
+		<field name="uuid" type="String" />
+		<field name="Bank_id" type="long" />
+		<field name="BankName" type="String" />
+		<field name="Bic" type="long" />
+		<field name="Address" type="String" />
+	</model>
+	<model name="DataBase.model.Employee">
+		<field name="uuid" type="String" />
+		<field name="Prson_id" type="long" />
+		<field name="LastName" type="String" />
+		<field name="FirstName" type="String" />
+		<field name="Patronymic" type="String" />
+		<field name="Date_of_birth" type="Date" />
+		<field name="Date_of_start_work" type="Date" />
+		<field name="WorkNumber" type="long" />
+		<field name="Position_Id" type="long" />
+		<field name="HomeNumber" type="long" />
+		<field name="Bank_id" type="long" />
+		<field name="IsArchive" type="long" />
+	</model>
+	<model name="DataBase.model.Positions">
+		<field name="uuid" type="String" />
+		<field name="Positions_id" type="long" />
+		<field name="Position_name" type="String" />
+		<field name="is_Archive" type="long" />
+		<field name="Salary" type="String" />
+	</model>
+</model-hints>
