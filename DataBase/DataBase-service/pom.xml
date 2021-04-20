@@ -8,6 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>DataBase-service</artifactId>
 	<version>1.0.0</version>
+	<packaging>jar</packaging>
 	<parent>
 		<groupId>DataBase</groupId>
 		<artifactId>DataBase</artifactId>

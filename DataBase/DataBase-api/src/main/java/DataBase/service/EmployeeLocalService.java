@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -74,6 +75,10 @@ public interface EmployeeLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Employee addEmployee(Employee employee);
+
+	public Employee addEmployee(
+			long userId, String firstName, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.

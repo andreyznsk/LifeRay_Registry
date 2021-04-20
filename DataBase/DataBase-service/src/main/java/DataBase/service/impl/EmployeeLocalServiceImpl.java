@@ -14,11 +14,18 @@
 
 package DataBase.service.impl;
 
+import DataBase.model.Employee;
 import DataBase.service.base.EmployeeLocalServiceBaseImpl;
 
+import DataBase.service.persistence.EmployeePersistence;
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
 import org.osgi.service.component.annotations.Component;
+
+import static com.liferay.portal.kernel.format.PhoneNumberFormatUtil.validate;
 
 /**
  * The implementation of the employee local service.
@@ -38,6 +45,30 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
+
+	public Employee addEmployee(
+			long userId, String firstName, ServiceContext serviceContext)
+			throws PortalException {
+
+		long groupId = serviceContext.getScopeGroupId();
+
+		User user = userLocalService.getUserById(userId);
+
+
+		long employeeId = counterLocalService.increment();
+
+		Employee employee = employeePersistence.create(employeeId);
+
+		employee.setUuid(serviceContext.getUuid());
+		employee.setBank_id(1);
+		employee.setFirstName(firstName);
+		employee.setExpandoBridgeAttributes(serviceContext);
+
+		employeePersistence.update(employee);
+
+		return employee;
+
+	}
 
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -49,6 +49,16 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.addEmployee(employee);
 	}
 
+	@Override
+	public DataBase.model.Employee addEmployee(
+			long userId, String firstName,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _employeeLocalService.addEmployee(
+			userId, firstName, serviceContext);
+	}
+
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.
 	 *

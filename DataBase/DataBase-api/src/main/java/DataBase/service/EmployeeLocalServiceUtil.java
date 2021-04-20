@@ -54,6 +54,14 @@ public class EmployeeLocalServiceUtil {
 		return getService().addEmployee(employee);
 	}
 
+	public static DataBase.model.Employee addEmployee(
+			long userId, String firstName,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addEmployee(userId, firstName, serviceContext);
+	}
+
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.
 	 *
