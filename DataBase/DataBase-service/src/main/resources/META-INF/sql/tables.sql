@@ -26,5 +26,5 @@ create table My_Positions (
 	Positions_id LONG not null primary key,
 	Position_name VARCHAR(75) null,
 	is_Archive LONG,
-	Salary VARCHAR(75) null
+	Salary LONG
 );

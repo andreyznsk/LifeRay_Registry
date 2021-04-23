@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -75,6 +76,11 @@ public interface BankLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Bank addBank(Bank bank);
 
+	public Bank addBank(
+			long bankId, String name, String address, long bic,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * Creates a new bank with the primary key. Does not add the bank to the database.
 	 *
@@ -116,6 +122,11 @@ public interface BankLocalService
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	public Bank deleteBank(long Bank_id) throws PortalException;
+
+	public Bank deleteBank(
+			long bankId, String name, String address, long bic,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * @throws PortalException
@@ -229,6 +240,9 @@ public interface BankLocalService
 	public int getBanksCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Bank> getEntries(int start, int end) throws SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
@@ -258,5 +272,10 @@ public interface BankLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Bank updateBank(Bank bank);
+
+	public Bank updateBank(
+			long bankId, String name, String address, long bic,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 }

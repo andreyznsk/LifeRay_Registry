@@ -71,7 +71,7 @@ public class PositionsModelImpl
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"Positions_id", Types.BIGINT},
 		{"Position_name", Types.VARCHAR}, {"is_Archive", Types.BIGINT},
-		{"Salary", Types.VARCHAR}
+		{"Salary", Types.BIGINT}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -82,11 +82,11 @@ public class PositionsModelImpl
 		TABLE_COLUMNS_MAP.put("Positions_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("Position_name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("is_Archive", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("Salary", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("Salary", Types.BIGINT);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table My_Positions (uuid_ VARCHAR(75) null,Positions_id LONG not null primary key,Position_name VARCHAR(75) null,is_Archive LONG,Salary VARCHAR(75) null)";
+		"create table My_Positions (uuid_ VARCHAR(75) null,Positions_id LONG not null primary key,Position_name VARCHAR(75) null,is_Archive LONG,Salary LONG)";
 
 	public static final String TABLE_SQL_DROP = "drop table My_Positions";
 
@@ -316,7 +316,7 @@ public class PositionsModelImpl
 			(BiConsumer<Positions, Long>)Positions::setIs_Archive);
 		attributeGetterFunctions.put("Salary", Positions::getSalary);
 		attributeSetterBiConsumers.put(
-			"Salary", (BiConsumer<Positions, String>)Positions::setSalary);
+			"Salary", (BiConsumer<Positions, Long>)Positions::setSalary);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -415,17 +415,12 @@ public class PositionsModelImpl
 
 	@JSON
 	@Override
-	public String getSalary() {
-		if (_Salary == null) {
-			return "";
-		}
-		else {
-			return _Salary;
-		}
+	public long getSalary() {
+		return _Salary;
 	}
 
 	@Override
-	public void setSalary(String Salary) {
+	public void setSalary(long Salary) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -597,12 +592,6 @@ public class PositionsModelImpl
 
 		positionsCacheModel.Salary = getSalary();
 
-		String Salary = positionsCacheModel.Salary;
-
-		if ((Salary != null) && (Salary.length() == 0)) {
-			positionsCacheModel.Salary = null;
-		}
-
 		return positionsCacheModel;
 	}
 
@@ -680,7 +669,7 @@ public class PositionsModelImpl
 	private long _Positions_id;
 	private String _Position_name;
 	private long _is_Archive;
-	private String _Salary;
+	private long _Salary;
 
 	public <T> T getColumnValue(String columnName) {
 		columnName = _attributeNames.getOrDefault(columnName, columnName);

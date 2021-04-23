@@ -37,6 +37,14 @@ public class PositionsLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>DataBase.service.impl.PositionsLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static DataBase.model.Positions addPositions(
+			long positionId, String name, long salary,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addPositions(
+			positionId, name, salary, serviceContext);
+	}
 
 	/**
 	 * Adds the positions to the database. Also notifies the appropriate model listeners.
@@ -83,6 +91,15 @@ public class PositionsLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().deletePersistedModel(persistedModel);
+	}
+
+	public static DataBase.model.Positions deletePosition(
+			long positionId, String name, long salary,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().deletePosition(
+			positionId, name, salary, serviceContext);
 	}
 
 	/**
@@ -213,6 +230,13 @@ public class PositionsLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static java.util.List<DataBase.model.Positions> getEntries(
+			int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return getService().getEntries(start, end);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {
@@ -252,6 +276,10 @@ public class PositionsLocalServiceUtil {
 		return getService().getPositions(Positions_id);
 	}
 
+	public static int getPositionsCount() {
+		return getService().getPositionsCount();
+	}
+
 	/**
 	 * Returns a range of all the positionses.
 	 *
@@ -276,6 +304,15 @@ public class PositionsLocalServiceUtil {
 	 */
 	public static int getPositionsesCount() {
 		return getService().getPositionsesCount();
+	}
+
+	public static DataBase.model.Positions updatePositions(
+			long positionId, String name, long salary,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updatePositions(
+			positionId, name, salary, serviceContext);
 	}
 
 	/**

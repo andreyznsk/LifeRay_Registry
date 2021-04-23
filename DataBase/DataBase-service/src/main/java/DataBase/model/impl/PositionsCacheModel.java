@@ -98,13 +98,7 @@ public class PositionsCacheModel
 		}
 
 		positionsImpl.setIs_Archive(is_Archive);
-
-		if (Salary == null) {
-			positionsImpl.setSalary("");
-		}
-		else {
-			positionsImpl.setSalary(Salary);
-		}
+		positionsImpl.setSalary(Salary);
 
 		positionsImpl.resetOriginalValues();
 
@@ -119,7 +113,8 @@ public class PositionsCacheModel
 		Position_name = objectInput.readUTF();
 
 		is_Archive = objectInput.readLong();
-		Salary = objectInput.readUTF();
+
+		Salary = objectInput.readLong();
 	}
 
 	@Override
@@ -142,18 +137,13 @@ public class PositionsCacheModel
 
 		objectOutput.writeLong(is_Archive);
 
-		if (Salary == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(Salary);
-		}
+		objectOutput.writeLong(Salary);
 	}
 
 	public String uuid;
 	public long Positions_id;
 	public String Position_name;
 	public long is_Archive;
-	public String Salary;
+	public long Salary;
 
 }

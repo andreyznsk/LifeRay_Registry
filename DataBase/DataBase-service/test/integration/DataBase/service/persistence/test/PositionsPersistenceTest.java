@@ -130,7 +130,7 @@ public class PositionsPersistenceTest {
 
 		newPositions.setIs_Archive(RandomTestUtil.nextLong());
 
-		newPositions.setSalary(RandomTestUtil.randomString());
+		newPositions.setSalary(RandomTestUtil.nextLong());
 
 		_positionses.add(_persistence.update(newPositions));
 
@@ -416,7 +416,7 @@ public class PositionsPersistenceTest {
 
 		positions.setIs_Archive(RandomTestUtil.nextLong());
 
-		positions.setSalary(RandomTestUtil.randomString());
+		positions.setSalary(RandomTestUtil.nextLong());
 
 		_positionses.add(_persistence.update(positions));
 

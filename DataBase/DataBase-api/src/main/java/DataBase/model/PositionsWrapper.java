@@ -76,7 +76,7 @@ public class PositionsWrapper
 			setIs_Archive(is_Archive);
 		}
 
-		String Salary = (String)attributes.get("Salary");
+		Long Salary = (Long)attributes.get("Salary");
 
 		if (Salary != null) {
 			setSalary(Salary);
@@ -129,7 +129,7 @@ public class PositionsWrapper
 	 * @return the salary of this positions
 	 */
 	@Override
-	public String getSalary() {
+	public long getSalary() {
 		return model.getSalary();
 	}
 
@@ -194,7 +194,7 @@ public class PositionsWrapper
 	 * @param Salary the salary of this positions
 	 */
 	@Override
-	public void setSalary(String Salary) {
+	public void setSalary(long Salary) {
 		model.setSalary(Salary);
 	}
 

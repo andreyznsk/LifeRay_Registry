@@ -32,6 +32,16 @@ public class PositionsLocalServiceWrapper
 		_positionsLocalService = positionsLocalService;
 	}
 
+	@Override
+	public DataBase.model.Positions addPositions(
+			long positionId, String name, long salary,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _positionsLocalService.addPositions(
+			positionId, name, salary, serviceContext);
+	}
+
 	/**
 	 * Adds the positions to the database. Also notifies the appropriate model listeners.
 	 *
@@ -80,6 +90,16 @@ public class PositionsLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _positionsLocalService.deletePersistedModel(persistedModel);
+	}
+
+	@Override
+	public DataBase.model.Positions deletePosition(
+			long positionId, String name, long salary,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _positionsLocalService.deletePosition(
+			positionId, name, salary, serviceContext);
 	}
 
 	/**
@@ -220,6 +240,14 @@ public class PositionsLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<DataBase.model.Positions> getEntries(
+			int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return _positionsLocalService.getEntries(start, end);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 
@@ -261,6 +289,11 @@ public class PositionsLocalServiceWrapper
 		return _positionsLocalService.getPositions(Positions_id);
 	}
 
+	@Override
+	public int getPositionsCount() {
+		return _positionsLocalService.getPositionsCount();
+	}
+
 	/**
 	 * Returns a range of all the positionses.
 	 *
@@ -287,6 +320,16 @@ public class PositionsLocalServiceWrapper
 	@Override
 	public int getPositionsesCount() {
 		return _positionsLocalService.getPositionsesCount();
+	}
+
+	@Override
+	public DataBase.model.Positions updatePositions(
+			long positionId, String name, long salary,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _positionsLocalService.updatePositions(
+			positionId, name, salary, serviceContext);
 	}
 
 	/**

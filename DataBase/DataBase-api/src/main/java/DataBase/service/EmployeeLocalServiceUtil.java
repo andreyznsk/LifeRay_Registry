@@ -55,11 +55,13 @@ public class EmployeeLocalServiceUtil {
 	}
 
 	public static DataBase.model.Employee addEmployee(
-			long userId, String firstName,
+			long userId, String[] strings, java.util.Date[] dates,
+			long[] numbers,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().addEmployee(userId, firstName, serviceContext);
+		return getService().addEmployee(
+			userId, strings, dates, numbers, serviceContext);
 	}
 
 	/**
@@ -258,6 +260,31 @@ public class EmployeeLocalServiceUtil {
 	 */
 	public static int getEmployeesCount() {
 		return getService().getEmployeesCount();
+	}
+
+	public static java.util.List<DataBase.model.Employee> getEntries(
+		long employeeId) {
+
+		return getService().getEntries(employeeId);
+	}
+
+	public static java.util.List<DataBase.model.Employee> getEntries(
+			long employeeId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return getService().getEntries(employeeId, start, end);
+	}
+
+	public static java.util.List<DataBase.model.Employee> getEntries(
+		long employeeId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<DataBase.model.Employee> obc) {
+
+		return getService().getEntries(employeeId, start, end, obc);
+	}
+
+	public static int getEntriesCount(long employeeId) {
+		return getService().getEntriesCount(employeeId);
 	}
 
 	public static

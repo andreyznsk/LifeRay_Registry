@@ -14,11 +14,18 @@
 
 package DataBase.service.impl;
 
+import DataBase.model.Bank;
+import DataBase.model.Positions;
 import DataBase.service.base.PositionsLocalServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.service.ServiceContext;
 import org.osgi.service.component.annotations.Component;
+
+import java.util.List;
 
 /**
  * The implementation of the positions local service.
@@ -38,10 +45,54 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class PositionsLocalServiceImpl extends PositionsLocalServiceBaseImpl {
+	public Positions addPositions(
+			long positionId,
+			String name,
+			long salary,
+			ServiceContext serviceContext)
+			throws PortalException {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>DataBase.service.PositionsLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>DataBase.service.PositionsLocalServiceUtil</code>.
-	 */
+		positionId = getPositionsCount() + 1;
+
+		Positions positions = positionsPersistence.create(positionId);
+		positions.setPosition_name(name);
+		positions.setSalary(salary);
+
+		positionsPersistence.update(positions);
+
+		return positions;
+	}
+
+	public Positions updatePositions(
+			long positionId,
+			String name,
+			long salary,
+			ServiceContext serviceContext)
+			throws PortalException {
+
+		Positions positions = getPositions(positionId);
+
+		positions.setPosition_name(name);
+		positions.setSalary(salary);
+		positionsPersistence.update(positions);
+		return positions;
+	}
+
+	public Positions deletePosition(
+			long positionId, String name,
+			long salary, ServiceContext serviceContext)
+			throws PortalException {
+
+		Positions positions = getPositions(positionId);
+		positions = deletePositions(positions);
+		return positions;
+	}
+
+	public List<Positions> getEntries(int start, int end)throws SystemException {
+		return positionsPersistence.findAll(start,end);
+	}
+
+	public int getPositionsCount() {
+		return positionsPersistence.countAll();
+	}
 }

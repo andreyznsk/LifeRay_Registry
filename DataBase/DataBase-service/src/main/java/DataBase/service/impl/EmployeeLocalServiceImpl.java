@@ -17,15 +17,17 @@ package DataBase.service.impl;
 import DataBase.model.Employee;
 import DataBase.service.base.EmployeeLocalServiceBaseImpl;
 
-import DataBase.service.persistence.EmployeePersistence;
 import com.liferay.portal.aop.AopService;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import org.osgi.service.component.annotations.Component;
 
-import static com.liferay.portal.kernel.format.PhoneNumberFormatUtil.validate;
+import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the employee local service.
@@ -47,21 +49,30 @@ import static com.liferay.portal.kernel.format.PhoneNumberFormatUtil.validate;
 public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 
 	public Employee addEmployee(
-			long userId, String firstName, ServiceContext serviceContext)
+			long userId,
+			String[] strings,
+			Date[] dates,
+			long[] numbers,
+			ServiceContext serviceContext)
 			throws PortalException {
 
 		long groupId = serviceContext.getScopeGroupId();
 
 		User user = userLocalService.getUserById(userId);
-
-
+		System.out.println("user: " + user);
 		long employeeId = counterLocalService.increment();
 
 		Employee employee = employeePersistence.create(employeeId);
-
+		//employee.setPrson_id(0l);
 		employee.setUuid(serviceContext.getUuid());
-		employee.setBank_id(1);
-		employee.setFirstName(firstName);
+		employee.setFirstName(strings[0]);
+		employee.setLastName(strings[1]);
+		employee.setPatronymic(strings[2]);
+		employee.setDate_of_birth(dates[0]);
+		employee.setDate_of_start_work(dates[1]);
+		employee.setHomeNumber(numbers[0]);
+		employee.setWorkNumber(numbers[1]);
+
 		employee.setExpandoBridgeAttributes(serviceContext);
 
 		employeePersistence.update(employee);
@@ -69,7 +80,33 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 		return employee;
 
 	}
+	public List<Employee> getEntries(long employeeId) {
+		return employeePersistence.findByPrson_id(employeeId);
+	}
 
+	public List<Employee> getEntries(long employeeId, int start, int end)
+			throws SystemException {
+
+		return employeePersistence.findByPrson_id(employeeId, start,  end );
+	}
+
+	public List<Employee> getEntries(
+			 long employeeId, int start, int end, OrderByComparator<Employee> obc) {
+
+		return employeePersistence.findByPrson_id(employeeId, start, end, obc);
+	}
+
+	public int getEntriesCount(long employeeId) {
+		return employeePersistence.countByPrson_id(employeeId);
+	}
+
+	protected void validate(String name, String entry)
+			throws PortalException {
+
+		/*if (Validator.isNull(name)) {
+			throw new EntryNameException();
+		}*/
+	}
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

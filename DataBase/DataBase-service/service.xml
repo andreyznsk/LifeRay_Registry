@@ -82,7 +82,7 @@
 
 		<column name="Position_name" type="String" />
 		<column name="is_Archive" type="long" />
-		<column name="Salary" type="String" />
+		<column name="Salary" type="long" />
 
 		<!-- Order -->
 
@@ -101,4 +101,7 @@
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
 		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
 	</entity>
+	<exceptions>
+		<exception>EntryName</exception>
+	</exceptions>
 </service-builder>

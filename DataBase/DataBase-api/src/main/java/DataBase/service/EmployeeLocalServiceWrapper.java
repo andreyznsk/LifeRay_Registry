@@ -51,12 +51,13 @@ public class EmployeeLocalServiceWrapper
 
 	@Override
 	public DataBase.model.Employee addEmployee(
-			long userId, String firstName,
+			long userId, String[] strings, java.util.Date[] dates,
+			long[] numbers,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _employeeLocalService.addEmployee(
-			userId, firstName, serviceContext);
+			userId, strings, dates, numbers, serviceContext);
 	}
 
 	/**
@@ -269,6 +270,33 @@ public class EmployeeLocalServiceWrapper
 	@Override
 	public int getEmployeesCount() {
 		return _employeeLocalService.getEmployeesCount();
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getEntries(long employeeId) {
+		return _employeeLocalService.getEntries(employeeId);
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getEntries(
+			long employeeId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return _employeeLocalService.getEntries(employeeId, start, end);
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getEntries(
+		long employeeId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<DataBase.model.Employee> obc) {
+
+		return _employeeLocalService.getEntries(employeeId, start, end, obc);
+	}
+
+	@Override
+	public int getEntriesCount(long employeeId) {
+		return _employeeLocalService.getEntriesCount(employeeId);
 	}
 
 	@Override

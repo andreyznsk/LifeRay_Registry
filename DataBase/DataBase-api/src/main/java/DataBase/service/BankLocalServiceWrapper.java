@@ -45,6 +45,16 @@ public class BankLocalServiceWrapper
 		return _bankLocalService.addBank(bank);
 	}
 
+	@Override
+	public DataBase.model.Bank addBank(
+			long bankId, String name, String address, long bic,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bankLocalService.addBank(
+			bankId, name, address, bic, serviceContext);
+	}
+
 	/**
 	 * Creates a new bank with the primary key. Does not add the bank to the database.
 	 *
@@ -98,6 +108,16 @@ public class BankLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _bankLocalService.deleteBank(Bank_id);
+	}
+
+	@Override
+	public DataBase.model.Bank deleteBank(
+			long bankId, String name, String address, long bic,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bankLocalService.deleteBank(
+			bankId, name, address, bic, serviceContext);
 	}
 
 	/**
@@ -253,6 +273,13 @@ public class BankLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<DataBase.model.Bank> getEntries(int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return _bankLocalService.getEntries(start, end);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 
@@ -293,6 +320,16 @@ public class BankLocalServiceWrapper
 	@Override
 	public DataBase.model.Bank updateBank(DataBase.model.Bank bank) {
 		return _bankLocalService.updateBank(bank);
+	}
+
+	@Override
+	public DataBase.model.Bank updateBank(
+			long bankId, String name, String address, long bic,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bankLocalService.updateBank(
+			bankId, name, address, bic, serviceContext);
 	}
 
 	@Override

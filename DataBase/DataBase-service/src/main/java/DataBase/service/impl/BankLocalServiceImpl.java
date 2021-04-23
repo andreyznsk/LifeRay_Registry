@@ -14,11 +14,21 @@
 
 package DataBase.service.impl;
 
+import DataBase.exception.NoSuchBankException;
+import DataBase.model.Bank;
 import DataBase.service.base.BankLocalServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import org.osgi.service.component.annotations.Component;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the bank local service.
@@ -39,9 +49,61 @@ import org.osgi.service.component.annotations.Component;
 )
 public class BankLocalServiceImpl extends BankLocalServiceBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>DataBase.service.BankLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>DataBase.service.BankLocalServiceUtil</code>.
-	 */
+	public Bank addBank(
+			long bankId,
+			String name,
+			String address,
+			long bic,
+			ServiceContext serviceContext)
+			throws PortalException {
+
+		bankId = getBanksCount() + 1;
+
+		Bank bank = bankPersistence.create(bankId);
+		bank.setBankName(name);
+		bank.setAddress(address);
+		bank.setBic(bic);
+		bank.setExpandoBridgeAttributes(serviceContext);
+		bankPersistence.update(bank);
+
+		return bank;
+	}
+
+	public Bank updateBank(
+			long bankId, String name, String address,
+			long bic, ServiceContext serviceContext)
+			throws PortalException {
+
+		Bank bank = getBank(bankId);
+
+		bank.setBankName(name);
+		bank.setAddress(address);
+
+
+		bankPersistence.update(bank);
+
+		return bank;
+	}
+
+	public Bank deleteBank(
+			long bankId, String name, String address,
+			long bic, ServiceContext serviceContext)
+			throws PortalException {
+
+		Bank bank = getBank(bankId);
+		bank = deleteBank(bank);
+		return bank;
+	}
+
+	public List<Bank> getEntries(int start, int end)throws SystemException {
+		return bankPersistence.findAll(start,end);
+	}
+
+
+
+
+	public int getBanksCount() {
+		return bankPersistence.countAll();
+	}
+
 }

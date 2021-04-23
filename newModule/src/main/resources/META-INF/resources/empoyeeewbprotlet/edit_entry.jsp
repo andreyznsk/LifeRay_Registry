@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ page pageEncoding="utf-8" %>
-<%@ include file="init.jsp" %>
+<%@ include file="../init.jsp" %>
 
 <portlet:renderURL var="viewURL">
-    <portlet:param name="mvcPath" value="/view.jsp"></portlet:param>
+    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/view.jsp"></portlet:param>
 </portlet:renderURL>
 
 <portlet:actionURL name="addEntry" var="addEntryURL"></portlet:actionURL>
@@ -15,7 +15,8 @@
         <aui:input name="Отчество"></aui:input>
         <aui:input name="Дата рождения"></aui:input>
         <aui:input name="дата утсройства на работу"></aui:input>
-        <aui:input name="Номер телефона"></aui:input>
+        <aui:input name="Домашний номер"></aui:input>
+        <aui:input name="Рабочий номер"></aui:input>
         <aui:input name="Номер банка"></aui:input>
     </aui:fieldset>
 
