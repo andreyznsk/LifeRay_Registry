@@ -14,6 +14,7 @@
 
 package DataBase.service.impl;
 
+import DataBase.exception.NoSuchEmployeeException;
 import DataBase.model.Employee;
 import DataBase.service.base.EmployeeLocalServiceBaseImpl;
 
@@ -26,6 +27,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import org.osgi.service.component.annotations.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -98,6 +100,40 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 	public int getEntriesCount(long employeeId) {
 		return employeePersistence.countByPrson_id(employeeId);
 	}
+
+
+	public List<Employee> getEmpByBank(long bankId) {
+		List<Employee> employees = new ArrayList<>();
+		List<Employee> empTemp = employeePersistence.findAll();
+		for (Employee employee : empTemp) {
+			if(employee.getBank_id() == bankId) employees.add(employee);
+		}
+		return employees;
+	}
+
+	public void updateEmployee(long userId, String[] strings, Date[] dates, long[] numbers, ServiceContext serviceContext) throws NoSuchEmployeeException {
+
+		Employee employee = employeePersistence.findByPrimaryKey(userId);
+
+		employee.setUuid(serviceContext.getUuid());
+		employee.setFirstName(strings[0]);
+		employee.setLastName(strings[1]);
+		employee.setPatronymic(strings[2]);
+		employee.setDate_of_birth(dates[0]);
+		employee.setDate_of_start_work(dates[1]);
+		employee.setHomeNumber(numbers[0]);
+		employee.setWorkNumber(numbers[1]);
+		employee.setBank_id(numbers[2]);
+		employee.setPosition_Id(numbers[3]);
+
+
+		employee.setExpandoBridgeAttributes(serviceContext);
+
+		employeePersistence.update(employee);
+
+	}
+
+
 
 	protected void validate(String name, String entry)
 			throws PortalException {

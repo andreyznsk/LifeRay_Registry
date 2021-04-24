@@ -16,7 +16,6 @@ package DataBase.service;
 
 import DataBase.model.Bank;
 
-import DataBase.model.Employee;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -208,6 +207,9 @@ public interface BankLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Bank> getArchivedBanks();
+
 	/**
 	 * Returns the bank with the primary key.
 	 *
@@ -261,6 +263,8 @@ public interface BankLocalService
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	public void recoverBank(long id) throws PortalException;
+
 	/**
 	 * Updates the bank in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
@@ -279,7 +283,4 @@ public interface BankLocalService
 			ServiceContext serviceContext)
 		throws PortalException;
 
-	default List<Employee> getBanks(int i, int i1, long bankId) {
-		return null;
-	}
 }

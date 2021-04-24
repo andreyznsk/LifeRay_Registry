@@ -6,9 +6,9 @@
     <portlet:param name="mvcPath" value="/empoyeeewbprotlet/view.jsp"></portlet:param>
 </portlet:renderURL>
 
-<portlet:actionURL name="addEntry" var="addEntryURL"></portlet:actionURL>
+<portlet:actionURL name="addEmployee" var="addEmployeeURL"></portlet:actionURL>
 
-<aui:form action="<%= addEntryURL %>" name="<portlet:namespace />fm">
+<aui:form action="<%= addEmployeeURL %>" name="<portlet:namespace />fm">
     <aui:fieldset>
         <aui:input name="Имя"></aui:input>
         <aui:input name="Фамилия"></aui:input>

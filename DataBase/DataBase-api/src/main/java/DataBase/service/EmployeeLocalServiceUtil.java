@@ -352,4 +352,8 @@ public class EmployeeLocalServiceUtil {
 
 		_serviceTracker = serviceTracker;
 	}
+
+	public static List<Employee> getEmpByBank(long bankId) {
+		return getService().getEmpByBank(bankId);
+	}
 }

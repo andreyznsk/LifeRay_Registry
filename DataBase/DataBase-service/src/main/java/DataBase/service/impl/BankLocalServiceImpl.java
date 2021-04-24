@@ -14,22 +14,18 @@
 
 package DataBase.service.impl;
 
-import DataBase.exception.NoSuchBankException;
+
 import DataBase.model.Bank;
-import DataBase.model.Employee;
 import DataBase.service.base.BankLocalServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import org.osgi.service.component.annotations.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -106,13 +102,11 @@ public class BankLocalServiceImpl extends BankLocalServiceBaseImpl {
 		return bank;
 	}
 
-	public List<Bank> getBanks(int start, int end)throws SystemException {
+	public List<Bank> getBanks(int start, int end) throws SystemException {
 		List<Bank> banks = new ArrayList<>();
 		List<Bank> banksTemp = bankPersistence.findAll(start,end);
-		int i = 0;
 		for (Bank bank : banksTemp) {
 			if (bank.getIsArchive() == 0) banks.add(bank);
-			i++;
 		}
 		return banks;
 	}
@@ -135,4 +129,22 @@ public class BankLocalServiceImpl extends BankLocalServiceBaseImpl {
 		return bankPersistence.countAll();
 	}
 
+
+	public List<Bank> getArchivedBanks() {
+		List<Bank> banks = new ArrayList<>();
+		System.out.println("Get banks");
+		List<Bank> banksTemp = bankPersistence.findAll(-1,-1);
+		for (Bank bank : banksTemp) {
+			if (bank.getIsArchive() == 1) banks.add(bank);
+			System.out.println(banks);
+		}
+		return banks;
+	}
+
+
+	public void recoverBank(long id) throws PortalException {
+		Bank bank = getBank(id);
+		bank.setIsArchive(0);
+		bankPersistence.update(bank);
+	}
 }

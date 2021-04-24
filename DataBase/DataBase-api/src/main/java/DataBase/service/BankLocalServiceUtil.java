@@ -14,12 +14,9 @@
 
 package DataBase.service;
 
-import DataBase.model.Employee;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
-
-import java.util.List;
 
 /**
  * Provides the local service utility for Bank. This utility wraps
@@ -229,6 +226,10 @@ public class BankLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static java.util.List<DataBase.model.Bank> getArchivedBanks() {
+		return getService().getArchivedBanks();
+	}
+
 	/**
 	 * Returns the bank with the primary key.
 	 *
@@ -301,6 +302,12 @@ public class BankLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static void recoverBank(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		getService().recoverBank(id);
+	}
+
 	/**
 	 * Updates the bank in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
@@ -342,4 +349,5 @@ public class BankLocalServiceUtil {
 
 		_serviceTracker = serviceTracker;
 	}
+
 }

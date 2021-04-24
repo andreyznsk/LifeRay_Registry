@@ -14,6 +14,7 @@
 
 package DataBase.service;
 
+import DataBase.exception.NoSuchEmployeeException;
 import DataBase.model.Employee;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -280,4 +281,7 @@ public interface EmployeeLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Employee updateEmployee(Employee employee);
 
+    List<Employee> getEmpByBank(long bankId);
+
+	void updateEmployee(long userId, String[] strings, Date[] dates, long[] numbers, ServiceContext serviceContext) throws NoSuchEmployeeException;
 }

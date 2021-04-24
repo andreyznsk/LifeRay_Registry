@@ -14,7 +14,13 @@
 
 package DataBase.service;
 
+import DataBase.exception.NoSuchEmployeeException;
+import DataBase.model.Employee;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Provides a wrapper for {@link EmployeeLocalService}.
@@ -352,6 +358,15 @@ public class EmployeeLocalServiceWrapper
 	@Override
 	public void setWrappedService(EmployeeLocalService employeeLocalService) {
 		_employeeLocalService = employeeLocalService;
+	}
+
+	@Override
+	public List<Employee> getEmpByBank(long bankId) {
+		return null;
+	}
+
+	@Override
+	public void updateEmployee(long userId, String[] strings, Date[] dates, long[] numbers, ServiceContext serviceContext) throws NoSuchEmployeeException {
 	}
 
 	private EmployeeLocalService _employeeLocalService;

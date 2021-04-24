@@ -232,6 +232,11 @@ public class BankLocalServiceWrapper
 		return _bankLocalService.getActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<DataBase.model.Bank> getArchivedBanks() {
+		return _bankLocalService.getArchivedBanks();
+	}
+
 	/**
 	 * Returns the bank with the primary key.
 	 *
@@ -305,6 +310,13 @@ public class BankLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _bankLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public void recoverBank(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_bankLocalService.recoverBank(id);
 	}
 
 	/**

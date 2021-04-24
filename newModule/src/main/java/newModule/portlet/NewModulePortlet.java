@@ -51,8 +51,11 @@ import java.util.logging.Logger;
 	},
 	service = Portlet.class
 )
+
+//=====================================Методы работы с должностями=====================================================
+
 public class NewModulePortlet extends MVCPortlet {
-	public void addEntry(ActionRequest request, ActionResponse response) throws PortalException {
+	public void addEmployee(ActionRequest request, ActionResponse response) throws PortalException {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				Entry.class.getName(), request);
@@ -74,8 +77,9 @@ public class NewModulePortlet extends MVCPortlet {
 			dates[1] = sdf.parse(str2);
 		} catch (ParseException e) {
 			System.out.println("Неправильный формат даты: y-m-d");
-			//SessionErrors.add(request, "Неправильный формат даты: y-m-d");
-			//PortalUtil.copyRequestParameters(request, response);
+			SessionErrors.add(request, "Неправильный формат даты: y-m-d");
+			PortalUtil.copyRequestParameters(request, response);
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_employee.jsp");
 		}
 		numbers[0] = ParamUtil.getLong(request, "Домашний номер");
 		numbers[1] = ParamUtil.getLong(request, "Рабочий номер");
@@ -92,9 +96,57 @@ public class NewModulePortlet extends MVCPortlet {
 			System.out.println("Exception");
 			System.err.println(e.getMessage());
 			e.printStackTrace();
-			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/edit_entry.jsp");
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_employee.jsp");
 		}
 	}
+
+	public void editEmployee(ActionRequest request, ActionResponse response) throws PortalException {
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				Entry.class.getName(), request);
+		String[] strings = new String[3];
+		Date[] dates = new Date[2];
+		long[] numbers = new long[4];
+
+		DateFormat sdf = new SimpleDateFormat("y-M-d");
+		long employeeId = ParamUtil.getLong(request,"employeeId",-1);
+		strings[0] = ParamUtil.getString(request, "Имя");
+		strings[1] = ParamUtil.getString(request, "Фамилия");
+		strings[2] = ParamUtil.getString(request, "Отчество");
+		String str1 = ParamUtil.getString(request, "Дата рождения");
+		String str2 = ParamUtil.getString(request, "дата утсройства на работу");
+
+		try {
+			dates[0] = sdf.parse(str1);
+			dates[1] = sdf.parse(str2);
+		} catch (ParseException e) {
+			System.out.println("Неправильный формат даты: y-m-d");
+			SessionErrors.add(request, "Неправильный формат даты: y-m-d");
+			PortalUtil.copyRequestParameters(request, response);
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_employee.jsp");
+		}
+		numbers[0] = ParamUtil.getLong(request, "Домашний номер");
+		numbers[1] = ParamUtil.getLong(request, "Рабочий номер");
+		numbers[2] = ParamUtil.getLong(request, "Номер банка");
+		numbers[3] = ParamUtil.getLong(request, "Номер должности");
+
+		try {
+			_employeeLocalService.updateEmployee(employeeId,
+					strings,dates,numbers,
+					serviceContext);
+			System.out.println("Add emp ok!");
+		}
+		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+			PortalUtil.copyRequestParameters(request, response);
+			System.out.println("Exception");
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_employee.jsp");
+		}
+	}
+
+	// =======================================Методы для работы с банками======================================
+
 	public void addBank(ActionRequest request, ActionResponse response) throws PortalException {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -163,9 +215,31 @@ public class NewModulePortlet extends MVCPortlet {
 
 	}
 
-	public List<Employee> getBanksEmp(int i, int i1, long bankId) {
+	public List<Employee> getBanksEmp(ActionRequest request, ActionResponse response) throws PortalException  {
 		return _employeeLocalService.getEmployees(-1,-1);
 	}
+
+	public void recoverBank(ActionRequest request, ActionResponse response) throws PortalException{
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				Entry.class.getName(), request);
+		long id = ParamUtil.getLong(request,"bankId",-1);
+		System.out.println("id: " + id);
+
+		try {
+			_bankLocalServices.recoverBank(id);
+			System.out.println("Recover bank ok!");
+		}
+		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+			PortalUtil.copyRequestParameters(request, response);
+			System.out.println("Exception");
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_bank.jsp");
+		}
+	}
+
+	//===========================================Методы для работы с должностями====================================================
 
 	public void addPosition(ActionRequest request, ActionResponse response) throws PortalException {
 
@@ -206,6 +280,8 @@ public class NewModulePortlet extends MVCPortlet {
 					Level.SEVERE, null, e);
 		}
 	}
+
+
 
 	@Reference(unbind = "-")
 	protected void setEmployeeService(EmployeeLocalService employeeLocalService){
