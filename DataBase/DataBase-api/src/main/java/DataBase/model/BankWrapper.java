@@ -45,6 +45,7 @@ public class BankWrapper
 		attributes.put("BankName", getBankName());
 		attributes.put("Bic", getBic());
 		attributes.put("Address", getAddress());
+		attributes.put("isArchive", getIsArchive());
 
 		return attributes;
 	}
@@ -79,6 +80,12 @@ public class BankWrapper
 
 		if (Address != null) {
 			setAddress(Address);
+		}
+
+		Integer isArchive = (Integer)attributes.get("isArchive");
+
+		if (isArchive != null) {
+			setIsArchive(isArchive);
 		}
 	}
 
@@ -120,6 +127,16 @@ public class BankWrapper
 	@Override
 	public long getBic() {
 		return model.getBic();
+	}
+
+	/**
+	 * Returns the is archive of this bank.
+	 *
+	 * @return the is archive of this bank
+	 */
+	@Override
+	public int getIsArchive() {
+		return model.getIsArchive();
 	}
 
 	/**
@@ -185,6 +202,16 @@ public class BankWrapper
 	@Override
 	public void setBic(long Bic) {
 		model.setBic(Bic);
+	}
+
+	/**
+	 * Sets the is archive of this bank.
+	 *
+	 * @param isArchive the is archive of this bank
+	 */
+	@Override
+	public void setIsArchive(int isArchive) {
+		model.setIsArchive(isArchive);
 	}
 
 	/**

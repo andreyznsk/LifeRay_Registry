@@ -14,9 +14,12 @@
 
 package DataBase.service;
 
+import DataBase.model.Employee;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
+
+import java.util.List;
 
 /**
  * Provides the local service utility for Bank. This utility wraps
@@ -339,5 +342,4 @@ public class BankLocalServiceUtil {
 
 		_serviceTracker = serviceTracker;
 	}
-
 }

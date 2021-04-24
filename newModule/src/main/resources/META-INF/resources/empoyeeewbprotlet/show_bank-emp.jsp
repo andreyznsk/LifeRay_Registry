@@ -2,35 +2,15 @@
 <%@ page pageEncoding="utf-8" %>
 <%@ include file="../init.jsp" %>
 <%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="com.liferay.portal.kernel.util.ListUtil"%>
-<%@page import="DataBase.model.*"%>
+<%@page import="newModule.portlet.*"%>
 <%@page import="DataBase.model.Employee"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@ page import="DataBase.service.*" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="DataBase.service.BankLocalService" %>
+<%@ page import="DataBase.service.BankLocalServiceUtil" %>
+<%@ page import="DataBase.service.impl.BankLocalServiceImpl" %>
+<%@ page import="DataBase.service.EmployeeLocalServiceUtil" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
-
-<%
-SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
-%>
-
-<portlet:renderURL var="addEntryURL">
-    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/edit_entry.jsp"></portlet:param>
-</portlet:renderURL>
-
-<portlet:renderURL var="addBankURL">
-    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/add_bank.jsp"></portlet:param>
-</portlet:renderURL>
-
-<portlet:renderURL var="addPositionURL">
-    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/add_position.jsp"></portlet:param>
-</portlet:renderURL>
-
-
-<portlet:renderURL var="deleteBankURL">
-    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/edit_bank.jsp"></portlet:param>
-</portlet:renderURL>
 
 
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
@@ -40,10 +20,10 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 </p>
 
 <%
-  List<Employee> employees = EmployeeLocalServiceUtil.getEmployees(-1,-1);
-  List<Bank> banks = BankLocalServiceUtil.getBanks(-1,-1);
-  List<Positions> positions = PositionsLocalServiceUtil.getPositionses(-1,-1);
+  long bankId = ParamUtil.getLong(request,"bankId",-1);
+  List<Employee> employees = getBanksEmp(bankId);
 %>
+
 <liferay-ui:tabs names="Реестр сотрудников,Реестр должностей,Реестр банков">
     <liferay-ui:section>
         <liferay-ui:search-container total="<%=employees.size()%>" var="searchContainer" delta="7" deltaConfigurable="true"

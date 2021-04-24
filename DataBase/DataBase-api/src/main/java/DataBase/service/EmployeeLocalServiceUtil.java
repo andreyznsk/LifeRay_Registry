@@ -14,9 +14,12 @@
 
 package DataBase.service;
 
+import DataBase.model.Employee;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
+
+import java.util.List;
 
 /**
  * Provides the local service utility for Employee. This utility wraps
@@ -349,5 +352,4 @@ public class EmployeeLocalServiceUtil {
 
 		_serviceTracker = serviceTracker;
 	}
-
 }

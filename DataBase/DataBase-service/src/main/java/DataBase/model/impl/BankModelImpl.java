@@ -69,7 +69,7 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"Bank_id", Types.BIGINT},
 		{"BankName", Types.VARCHAR}, {"Bic", Types.BIGINT},
-		{"Address", Types.VARCHAR}
+		{"Address", Types.VARCHAR}, {"isArchive", Types.INTEGER}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -81,10 +81,11 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 		TABLE_COLUMNS_MAP.put("BankName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("Bic", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("Address", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("isArchive", Types.INTEGER);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table My_Bank (uuid_ VARCHAR(75) null,Bank_id LONG not null primary key,BankName VARCHAR(75) null,Bic LONG,Address VARCHAR(75) null)";
+		"create table My_Bank (uuid_ VARCHAR(75) null,Bank_id LONG not null primary key,BankName VARCHAR(75) null,Bic LONG,Address VARCHAR(75) null,isArchive INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table My_Bank";
 
@@ -151,6 +152,7 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 		model.setBankName(soapModel.getBankName());
 		model.setBic(soapModel.getBic());
 		model.setAddress(soapModel.getAddress());
+		model.setIsArchive(soapModel.getIsArchive());
 
 		return model;
 	}
@@ -310,6 +312,9 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 		attributeGetterFunctions.put("Address", Bank::getAddress);
 		attributeSetterBiConsumers.put(
 			"Address", (BiConsumer<Bank, String>)Bank::setAddress);
+		attributeGetterFunctions.put("isArchive", Bank::getIsArchive);
+		attributeSetterBiConsumers.put(
+			"isArchive", (BiConsumer<Bank, Integer>)Bank::setIsArchive);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -425,6 +430,21 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 		_Address = Address;
 	}
 
+	@JSON
+	@Override
+	public int getIsArchive() {
+		return _isArchive;
+	}
+
+	@Override
+	public void setIsArchive(int isArchive) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_isArchive = isArchive;
+	}
+
 	public long getColumnBitmask() {
 		if (_columnBitmask > 0) {
 			return _columnBitmask;
@@ -484,6 +504,7 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 		bankImpl.setBankName(getBankName());
 		bankImpl.setBic(getBic());
 		bankImpl.setAddress(getAddress());
+		bankImpl.setIsArchive(getIsArchive());
 
 		bankImpl.resetOriginalValues();
 
@@ -595,6 +616,8 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 			bankCacheModel.Address = null;
 		}
 
+		bankCacheModel.isArchive = getIsArchive();
+
 		return bankCacheModel;
 	}
 
@@ -671,6 +694,7 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 	private String _BankName;
 	private long _Bic;
 	private String _Address;
+	private int _isArchive;
 
 	public <T> T getColumnValue(String columnName) {
 		columnName = _attributeNames.getOrDefault(columnName, columnName);
@@ -706,6 +730,7 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 		_columnOriginalValues.put("BankName", _BankName);
 		_columnOriginalValues.put("Bic", _Bic);
 		_columnOriginalValues.put("Address", _Address);
+		_columnOriginalValues.put("isArchive", _isArchive);
 	}
 
 	private static final Map<String, String> _attributeNames;
@@ -738,6 +763,8 @@ public class BankModelImpl extends BaseModelImpl<Bank> implements BankModel {
 		columnBitmasks.put("Bic", 8L);
 
 		columnBitmasks.put("Address", 16L);
+
+		columnBitmasks.put("isArchive", 32L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

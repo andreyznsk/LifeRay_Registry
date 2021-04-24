@@ -126,4 +126,18 @@ public interface BankModel extends BaseModel<Bank> {
 	 */
 	public void setAddress(String Address);
 
+	/**
+	 * Returns the is archive of this bank.
+	 *
+	 * @return the is archive of this bank
+	 */
+	public int getIsArchive();
+
+	/**
+	 * Sets the is archive of this bank.
+	 *
+	 * @param isArchive the is archive of this bank
+	 */
+	public void setIsArchive(int isArchive);
+
 }

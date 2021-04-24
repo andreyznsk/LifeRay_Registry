@@ -13,6 +13,7 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="BankName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Bic" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Address" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="isArchive" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="DataBase.model.impl.EmployeeImpl" table="My_Employee">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Prson_id" type="long">

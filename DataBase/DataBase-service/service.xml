@@ -53,6 +53,8 @@
 		<column name="BankName" type="String" />
 		<column name="Bic" type="long" />
 		<column name="Address" type="String" />
+		<column name="isArchive" type="int" />
+
 
 		<!-- Order -->
 

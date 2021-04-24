@@ -60,10 +60,9 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 
 		User user = userLocalService.getUserById(userId);
 		System.out.println("user: " + user);
-		long employeeId = counterLocalService.increment();
-
+		long employeeId = getEmployeesCount() + 1;
 		Employee employee = employeePersistence.create(employeeId);
-		//employee.setPrson_id(0l);
+
 		employee.setUuid(serviceContext.getUuid());
 		employee.setFirstName(strings[0]);
 		employee.setLastName(strings[1]);

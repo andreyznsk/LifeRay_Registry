@@ -16,6 +16,7 @@ package DataBase.service.impl;
 
 import DataBase.exception.NoSuchBankException;
 import DataBase.model.Bank;
+import DataBase.model.Employee;
 import DataBase.service.base.BankLocalServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
@@ -27,6 +28,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import org.osgi.service.component.annotations.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -84,6 +86,15 @@ public class BankLocalServiceImpl extends BankLocalServiceBaseImpl {
 
 		return bank;
 	}
+	public Bank deleteBank(
+			long bankId)
+			throws PortalException {
+		Bank bank = getBank(bankId);
+		bank.setIsArchive(1);
+		bankPersistence.update(bank);
+		return bank;
+
+	}
 
 	public Bank deleteBank(
 			long bankId, String name, String address,
@@ -95,12 +106,30 @@ public class BankLocalServiceImpl extends BankLocalServiceBaseImpl {
 		return bank;
 	}
 
-	public List<Bank> getEntries(int start, int end)throws SystemException {
-		return bankPersistence.findAll(start,end);
+	public List<Bank> getBanks(int start, int end)throws SystemException {
+		List<Bank> banks = new ArrayList<>();
+		List<Bank> banksTemp = bankPersistence.findAll(start,end);
+		int i = 0;
+		for (Bank bank : banksTemp) {
+			if (bank.getIsArchive() == 0) banks.add(bank);
+			i++;
+		}
+		return banks;
 	}
 
+	public List<Bank> getEntries(int start, int end) throws SystemException{
+		return bankLocalService.getEntries(start,end);
+	}
 
-
+	/*@Override
+	public List<Employee> getBanks(int i, int i1, long bankId) {
+		List<Employee> employees = new ArrayList<>();
+		List<Employee> emp_temp = employeePersistence.findAll(-1,-1);
+		for (Employee employee : emp_temp) {
+			if(employee.getBank_id() == bankId) employees.add(employee);
+		}
+		return employees;
+	}*/
 
 	public int getBanksCount() {
 		return bankPersistence.countAll();

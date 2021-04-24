@@ -27,7 +27,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -138,6 +140,33 @@ public class NewModulePortlet extends MVCPortlet {
 		}
 
 	}
+	public void deleteBank(ActionRequest request, ActionResponse response) throws PortalException {
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				Entry.class.getName(), request);
+		long id = ParamUtil.getLong(request,"bankId",-1);
+		System.out.println("id: " + id);
+
+		try {
+			_bankLocalServices.deleteBank(id);
+			System.out.println(_bankLocalServices.getBank(id));
+			System.out.println("Delete bank ok!");
+		}
+		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+			PortalUtil.copyRequestParameters(request, response);
+			System.out.println("Exception");
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_bank.jsp");
+		}
+
+	}
+
+	public List<Employee> getBanksEmp(int i, int i1, long bankId) {
+		return _employeeLocalService.getEmployees(-1,-1);
+	}
+
 	public void addPosition(ActionRequest request, ActionResponse response) throws PortalException {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -177,7 +206,6 @@ public class NewModulePortlet extends MVCPortlet {
 					Level.SEVERE, null, e);
 		}
 	}
-
 
 	@Reference(unbind = "-")
 	protected void setEmployeeService(EmployeeLocalService employeeLocalService){

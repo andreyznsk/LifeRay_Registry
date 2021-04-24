@@ -16,6 +16,7 @@ package DataBase.service;
 
 import DataBase.model.Bank;
 
+import DataBase.model.Employee;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -278,4 +279,7 @@ public interface BankLocalService
 			ServiceContext serviceContext)
 		throws PortalException;
 
+	default List<Employee> getBanks(int i, int i1, long bankId) {
+		return null;
+	}
 }

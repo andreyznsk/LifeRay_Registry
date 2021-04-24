@@ -132,6 +132,8 @@ public class BankPersistenceTest {
 
 		newBank.setAddress(RandomTestUtil.randomString());
 
+		newBank.setIsArchive(RandomTestUtil.nextInt());
+
 		_banks.add(_persistence.update(newBank));
 
 		Bank existingBank = _persistence.findByPrimaryKey(
@@ -142,6 +144,8 @@ public class BankPersistenceTest {
 		Assert.assertEquals(existingBank.getBankName(), newBank.getBankName());
 		Assert.assertEquals(existingBank.getBic(), newBank.getBic());
 		Assert.assertEquals(existingBank.getAddress(), newBank.getAddress());
+		Assert.assertEquals(
+			existingBank.getIsArchive(), newBank.getIsArchive());
 	}
 
 	@Test
@@ -188,7 +192,7 @@ public class BankPersistenceTest {
 	protected OrderByComparator<Bank> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
 			"My_Bank", "uuid", true, "Bank_id", true, "BankName", true, "Bic",
-			true, "Address", true);
+			true, "Address", true, "isArchive", true);
 	}
 
 	@Test
@@ -401,6 +405,8 @@ public class BankPersistenceTest {
 		bank.setBic(RandomTestUtil.nextLong());
 
 		bank.setAddress(RandomTestUtil.randomString());
+
+		bank.setIsArchive(RandomTestUtil.nextInt());
 
 		_banks.add(_persistence.update(bank));
 
