@@ -133,7 +133,9 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 
 	}
 
-
+	public long countEmployeeByBank(long bankId) throws SystemException{
+		return employeeFinder.countEmployeeByBank(bankId);
+	}
 
 	protected void validate(String name, String entry)
 			throws PortalException {

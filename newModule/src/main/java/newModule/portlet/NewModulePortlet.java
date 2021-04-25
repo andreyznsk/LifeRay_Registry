@@ -4,13 +4,17 @@ import DataBase.model.Employee;
 import DataBase.model.impl.EmployeeImpl;
 
 import DataBase.service.*;
+import DataBase.service.impl.BankLocalServiceImpl;
 import DataBase.service.impl.EmployeeLocalServiceImpl;
 import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.service.EntryLocalService;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import newModule.constants.NewModulePortletKeys;
@@ -29,6 +33,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Dictionary;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -159,6 +164,7 @@ public class NewModulePortlet extends MVCPortlet {
 		try {
 			_bankLocalServices.addBank(serviceContext.getUserId(),bankName,bankAddress,bic,serviceContext);
 			System.out.println("Add bank ok!");
+			SessionMessages.add(request,"bankAdded");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -168,7 +174,9 @@ public class NewModulePortlet extends MVCPortlet {
 			e.printStackTrace();
 			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_bank.jsp");
 		}
+
 	}
+
 	public void editBank(ActionRequest request, ActionResponse response) throws PortalException {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -200,7 +208,8 @@ public class NewModulePortlet extends MVCPortlet {
 		System.out.println("id: " + id);
 
 		try {
-			_bankLocalServices.deleteBank(id);
+			System.out.println("Количество работников у банка: "+_employeeLocalService.countEmployeeByBank(id));
+			//_bankLocalServices.deleteBank(id);
 			System.out.println(_bankLocalServices.getBank(id));
 			System.out.println("Delete bank ok!");
 		}

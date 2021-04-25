@@ -18,6 +18,7 @@ import DataBase.model.Employee;
 
 import DataBase.service.EmployeeLocalService;
 import DataBase.service.persistence.BankPersistence;
+import DataBase.service.persistence.EmployeeFinder;
 import DataBase.service.persistence.EmployeePersistence;
 import DataBase.service.persistence.PositionsPersistence;
 
@@ -419,6 +420,9 @@ public abstract class EmployeeLocalServiceBaseImpl
 
 	@Reference
 	protected EmployeePersistence employeePersistence;
+
+	@Reference
+	protected EmployeeFinder employeeFinder;
 
 	@Reference
 	protected PositionsPersistence positionsPersistence;

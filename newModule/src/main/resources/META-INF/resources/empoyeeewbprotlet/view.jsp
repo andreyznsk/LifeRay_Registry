@@ -47,6 +47,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 	<b><liferay-ui:message key="newmodule.caption"/></b>
 </p>
 
+<liferay-ui:success key="bankAdded" message="bank-added" />
+
 <%
   List<Employee> employees = EmployeeLocalServiceUtil.getEmployees(-1,-1);
   List<Bank> banks = BankLocalServiceUtil.getBanks(-1,-1);
