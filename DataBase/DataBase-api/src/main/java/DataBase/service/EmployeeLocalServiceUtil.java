@@ -229,6 +229,12 @@ public class EmployeeLocalServiceUtil {
 		return getService().getEmpByBank(bankId);
 	}
 
+	public static java.util.List<DataBase.model.Employee> getEmpByPosition(
+		long id) {
+
+		return getService().getEmpByPosition(id);
+	}
+
 	/**
 	 * Returns the employee with the primary key.
 	 *

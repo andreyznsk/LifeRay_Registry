@@ -106,12 +106,12 @@
 
                   <portlet:renderURL var="editEmployeeURL">
                       <portlet:param name="mvcPath" value="/empoyeeewbprotlet/edit_employee.jsp"></portlet:param>
-                      <portlet:param name="employeeId" value="${emp.prson_id}" />
+                      <portlet:param name="employeeId" value="<%=String.valueOf(model.getPrson_id())%>" />
                   </portlet:renderURL>
                   <liferay-ui:icon message="редактировать" url="<%=editEmployeeURL.toString()%>" />
 
                   <portlet:actionURL name="deleteEmployee" var="deleteEmployeeURL">
-                      <portlet:param name="employeeId" value="${emp.prson_id}" />
+                      <portlet:param name="employeeId" value="<%=String.valueOf(model.getPrson_id())%>" />
                   </portlet:actionURL>
                   <liferay-ui:icon-delete message="Отправить в архив" url="<%=deleteEmployeeURL.toString()%>" />
 

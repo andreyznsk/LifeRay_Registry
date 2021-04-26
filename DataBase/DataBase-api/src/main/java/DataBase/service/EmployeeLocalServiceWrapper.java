@@ -14,10 +14,7 @@
 
 package DataBase.service;
 
-import DataBase.model.Employee;
 import com.liferay.portal.kernel.service.ServiceWrapper;
-
-import java.util.List;
 
 /**
  * Provides a wrapper for {@link EmployeeLocalService}.
@@ -238,6 +235,11 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.getEmpByBank(bankId);
 	}
 
+	@Override
+	public java.util.List<DataBase.model.Employee> getEmpByPosition(long id) {
+		return _employeeLocalService.getEmpByPosition(id);
+	}
+
 	/**
 	 * Returns the employee with the primary key.
 	 *
@@ -402,11 +404,6 @@ public class EmployeeLocalServiceWrapper
 	@Override
 	public void setWrappedService(EmployeeLocalService employeeLocalService) {
 		_employeeLocalService = employeeLocalService;
-	}
-
-	@Override
-	public List<Employee> getEmpByPosition(long id) {
-		return  _employeeLocalService.getEmpByPosition(id);
 	}
 
 	private EmployeeLocalService _employeeLocalService;

@@ -208,6 +208,9 @@ public interface EmployeeLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Employee> getEmpByBank(long bankId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEmpByPosition(long id);
+
 	/**
 	 * Returns the employee with the primary key.
 	 *
@@ -304,5 +307,4 @@ public interface EmployeeLocalService
 			ServiceContext serviceContext)
 		throws NoSuchEmployeeException;
 
-    List<Employee> getEmpByPosition(long id);
 }
