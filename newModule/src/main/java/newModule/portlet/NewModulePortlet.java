@@ -211,9 +211,17 @@ public class NewModulePortlet extends MVCPortlet {
 	}
 	public void editBank(ActionRequest request, ActionResponse response) throws PortalException {
 
+		boolean isEmpByBank = false;
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				Entry.class.getName(), request);
 		long id = ParamUtil.getLong(request,"bankId",-1);
+
+		List<Employee> employees = _employeeLocalService.getEmpByBank(id);
+		if(employees.size() != 0) {
+			isEmpByBank = true;
+			SessionMessages.add(request,"bankWarning");
+		}
 
 		System.out.println("id: " + id);
 		String bankName = ParamUtil.getString(request, "Название банка");
@@ -222,7 +230,7 @@ public class NewModulePortlet extends MVCPortlet {
 		try {
 			_bankLocalServices.updateBank(id,bankName,bankAddress,-1l,serviceContext);
 			System.out.println("Update bank ok!");
-			SessionMessages.add(request, "bankUpdated");
+			if(isEmpByBank == false) SessionMessages.add(request, "bankUpdated");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -240,6 +248,12 @@ public class NewModulePortlet extends MVCPortlet {
 				Entry.class.getName(), request);
 		long id = ParamUtil.getLong(request,"bankId",-1);
 		System.out.println("id: " + id);
+
+		List<Employee> employees = _employeeLocalService.getEmpByBank(id);
+		if(employees.size() != 0) {
+			SessionErrors.add(request,"bankWarning");
+			return;
+		}
 
 		try {
 			_bankLocalServices.deleteBank(id);
@@ -310,17 +324,27 @@ public class NewModulePortlet extends MVCPortlet {
 
 	public void editPosition(ActionRequest request, ActionResponse response) throws PortalException {
 
+		boolean isEmpByPositin = false;
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				Entry.class.getName(), request);
 		long id = ParamUtil.getLong(request,"positionId",-1);
 		System.out.println("id: " + id);
+
+		List<Employee> employees = _employeeLocalService.getEmpByPosition(id);
+
+		if(employees.size() != 0) {
+			isEmpByPositin = true;
+			SessionMessages.add(request,"positionWarning");
+		}
+
 		String posissionName = ParamUtil.getString(request, "Название");
 		long salary = ParamUtil.getLong(request, "Зар.Плата");
 
 		try {
 			_positionLocalServices.updatePositions(id,posissionName,salary,serviceContext);
 			System.out.println("Update position ok!");
-			SessionMessages.add(request, "positionUpdated");
+			if(isEmpByPositin == false) SessionMessages.add(request, "positionUpdated");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -340,6 +364,14 @@ public class NewModulePortlet extends MVCPortlet {
 				Entry.class.getName(), request);
 		long id = ParamUtil.getLong(request,"positionId",-1);
 		System.out.println("id: " + id);
+		List<Employee> employees = _employeeLocalService.getEmpByPosition(id);
+		System.out.println("Employees by id: " + employees.size());
+
+
+		if(employees.size() != 0){
+			SessionErrors.add(request,"position_warning");
+			return;
+		}
 
 		try {
 			_positionLocalServices.deletePosition(id);

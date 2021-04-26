@@ -117,19 +117,31 @@ public class EmployeeModelImpl
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)
 	 */
 	@Deprecated
-	public static final long ISARCHIVE_COLUMN_BITMASK = 1L;
+	public static final long BANK_ID_COLUMN_BITMASK = 1L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)
 	 */
 	@Deprecated
-	public static final long PRSON_ID_COLUMN_BITMASK = 2L;
+	public static final long ISARCHIVE_COLUMN_BITMASK = 2L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)
 	 */
 	@Deprecated
-	public static final long UUID_COLUMN_BITMASK = 4L;
+	public static final long POSITION_ID_COLUMN_BITMASK = 4L;
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)
+	 */
+	@Deprecated
+	public static final long PRSON_ID_COLUMN_BITMASK = 8L;
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)
+	 */
+	@Deprecated
+	public static final long UUID_COLUMN_BITMASK = 16L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
@@ -544,6 +556,16 @@ public class EmployeeModelImpl
 		_Position_Id = Position_Id;
 	}
 
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public long getOriginalPosition_Id() {
+		return GetterUtil.getLong(
+			this.<Long>getColumnOriginalValue("Position_Id"));
+	}
+
 	@JSON
 	@Override
 	public long getHomeNumber() {
@@ -572,6 +594,15 @@ public class EmployeeModelImpl
 		}
 
 		_Bank_id = Bank_id;
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public long getOriginalBank_id() {
+		return GetterUtil.getLong(this.<Long>getColumnOriginalValue("Bank_id"));
 	}
 
 	@JSON

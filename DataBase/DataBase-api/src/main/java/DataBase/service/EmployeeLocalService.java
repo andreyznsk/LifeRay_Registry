@@ -258,7 +258,8 @@ public interface EmployeeLocalService
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Employee> getNotAchiveEmployee(int isArchived, int start, int end);
+	public List<Employee> getNotAchiveEmployee(
+		int isArchived, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Employee> getNotArchivedEmployee(
@@ -303,4 +304,5 @@ public interface EmployeeLocalService
 			ServiceContext serviceContext)
 		throws NoSuchEmployeeException;
 
+    List<Employee> getEmpByPosition(long id);
 }

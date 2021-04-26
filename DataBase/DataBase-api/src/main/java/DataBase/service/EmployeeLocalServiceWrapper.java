@@ -14,7 +14,10 @@
 
 package DataBase.service;
 
+import DataBase.model.Employee;
 import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import java.util.List;
 
 /**
  * Provides a wrapper for {@link EmployeeLocalService}.
@@ -313,9 +316,10 @@ public class EmployeeLocalServiceWrapper
 
 	@Override
 	public java.util.List<DataBase.model.Employee> getNotAchiveEmployee(
-            int isArchived, int start, int end) {
+		int isArchived, int start, int end) {
 
-		return _employeeLocalService.getNotAchiveEmployee(isArchived, start, end);
+		return _employeeLocalService.getNotAchiveEmployee(
+			isArchived, start, end);
 	}
 
 	@Override
@@ -398,6 +402,11 @@ public class EmployeeLocalServiceWrapper
 	@Override
 	public void setWrappedService(EmployeeLocalService employeeLocalService) {
 		_employeeLocalService = employeeLocalService;
+	}
+
+	@Override
+	public List<Employee> getEmpByPosition(long id) {
+		return  _employeeLocalService.getEmpByPosition(id);
 	}
 
 	private EmployeeLocalService _employeeLocalService;

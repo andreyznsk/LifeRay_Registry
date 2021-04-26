@@ -40,6 +40,14 @@
 			<finder-column name="IsArchive" />
 		</finder>
 
+		<finder name="Bank_id" return-type="Collection">
+			<finder-column name="Bank_id" />
+		</finder>
+
+		<finder name="Position_Id" return-type="Collection">
+			<finder-column name="Position_Id" />
+		</finder>
+
 		<!-- References -->
 
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />

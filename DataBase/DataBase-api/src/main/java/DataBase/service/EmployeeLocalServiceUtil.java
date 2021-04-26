@@ -301,9 +301,9 @@ public class EmployeeLocalServiceUtil {
 	}
 
 	public static java.util.List<DataBase.model.Employee> getNotAchiveEmployee(
-		int i, int i1, int i2) {
+		int isArchived, int start, int end) {
 
-		return getService().getNotAchiveEmployee(i, i1, i2);
+		return getService().getNotAchiveEmployee(isArchived, start, end);
 	}
 
 	public static java.util.List<DataBase.model.Employee>

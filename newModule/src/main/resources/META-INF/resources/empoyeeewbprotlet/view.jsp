@@ -61,6 +61,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 <liferay-ui:success key="positionAdded" message="position-added" />
 <liferay-ui:success key="positionUpdated" message="position-updated" />
 <liferay-ui:success key="positionDeleted" message="position-deleted" />
+<liferay-ui:success key="positionWarning" message="position_warning" />
+<liferay-ui:success key="bankWarning" message="bank_warning" />
+
 
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 

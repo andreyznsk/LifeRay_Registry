@@ -7,6 +7,8 @@
     <portlet:param name="mvcPath" value="/empoyeeewbprotlet/view.jsp"></portlet:param>
 </portlet:renderURL>
 
+<liferay-ui:success key="bankWarning" message="bank_warning" />
+
 <%
    String bank_id = ParamUtil.getString(request,"bankId");
    long bic = ParamUtil.getLong(request,"bic",-1);

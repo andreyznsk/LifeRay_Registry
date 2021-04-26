@@ -165,6 +165,11 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 		return employeePersistence.findByIsArchive(isArchived, start, end);
 	}
 
+	@Override
+	public List<Employee> getEmpByPosition(long id) {
+		return employeePersistence.findByPosition_Id(id,-1,-1);
+	}
+
 	protected void validate(String name, String entry)
 			throws PortalException {
 
