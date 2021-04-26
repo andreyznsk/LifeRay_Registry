@@ -139,6 +139,11 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 
 	}
 
+	@Override
+	public List<Employee> getNotArchivedEmployee(long isArchived, int start, int end) {
+		return employeePersistence.findByIsArchive(isArchived);
+	}
+
 	public Employee deleteEmployee(long Prson_id) throws PortalException{
 		System.out.println(Prson_id);
 		Employee employee = employeePersistence.findByPrimaryKey(Prson_id);
@@ -155,6 +160,10 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 		employeePersistence.update(employee);
 	}
 
+	@Override
+	public List<Employee> getNotAchiveEmployee(int isArchived, int start, int end) {
+		return employeePersistence.findByIsArchive(isArchived, start, end);
+	}
 
 	protected void validate(String name, String entry)
 			throws PortalException {

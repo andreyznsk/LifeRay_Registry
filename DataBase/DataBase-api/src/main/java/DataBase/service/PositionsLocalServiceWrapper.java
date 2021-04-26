@@ -14,11 +14,7 @@
 
 package DataBase.service;
 
-import DataBase.model.Positions;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceWrapper;
-
-import java.util.List;
 
 /**
  * Provides a wrapper for {@link PositionsLocalService}.
@@ -94,6 +90,13 @@ public class PositionsLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _positionsLocalService.deletePersistedModel(persistedModel);
+	}
+
+	@Override
+	public DataBase.model.Positions deletePosition(long positionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _positionsLocalService.deletePosition(positionId);
 	}
 
 	@Override
@@ -258,6 +261,14 @@ public class PositionsLocalServiceWrapper
 		return _positionsLocalService.getIndexableActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<DataBase.model.Positions> getNotArchivedPositionses(
+		long isArchived, int start, int end) {
+
+		return _positionsLocalService.getNotArchivedPositionses(
+			isArchived, start, end);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -327,6 +338,13 @@ public class PositionsLocalServiceWrapper
 	}
 
 	@Override
+	public void recoverPosition(long positionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_positionsLocalService.recoverPosition(positionId);
+	}
+
+	@Override
 	public DataBase.model.Positions updatePositions(
 			long positionId, String name, long salary,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -354,11 +372,6 @@ public class PositionsLocalServiceWrapper
 	}
 
 	@Override
-	public List<Positions> getNotArchivedPositionses(long isArchived, int start, int end) {
-		return _positionsLocalService.getNotArchivedPositionses(isArchived,start,end);
-	}
-
-	@Override
 	public PositionsLocalService getWrappedService() {
 		return _positionsLocalService;
 	}
@@ -368,18 +381,6 @@ public class PositionsLocalServiceWrapper
 		_positionsLocalService = positionsLocalService;
 	}
 
-	@Override
-	public Positions deletePosition(long positionId) throws PortalException {
-		return _positionsLocalService.deletePosition(positionId);
-	}
-
-	@Override
-	public void recoverPosition(long id) throws PortalException {
-		_positionsLocalService.recoverPosition(id);
-	}
-
 	private PositionsLocalService _positionsLocalService;
-
-
 
 }

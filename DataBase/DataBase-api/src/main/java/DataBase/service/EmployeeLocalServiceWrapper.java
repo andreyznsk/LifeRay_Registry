@@ -312,6 +312,21 @@ public class EmployeeLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<DataBase.model.Employee> getNotAchiveEmployee(
+            int isArchived, int start, int end) {
+
+		return _employeeLocalService.getNotAchiveEmployee(isArchived, start, end);
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getNotArchivedEmployee(
+		long isArchived, int start, int end) {
+
+		return _employeeLocalService.getNotArchivedEmployee(
+			isArchived, start, end);
+	}
+
+	@Override
 	public java.util.List<DataBase.model.Employee> getNotArchiveEmployee(
 		int isArchived, int start, int end) {
 

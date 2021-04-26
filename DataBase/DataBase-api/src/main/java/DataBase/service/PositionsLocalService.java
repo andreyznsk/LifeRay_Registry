@@ -102,14 +102,12 @@ public interface PositionsLocalService
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException;
 
+	public Positions deletePosition(long positionId) throws PortalException;
+
 	public Positions deletePosition(
 			long positionId, String name, long salary,
 			ServiceContext serviceContext)
 		throws PortalException;
-
-	public Positions deletePosition(
-			long positionId)
-			throws PortalException;
 
 	/**
 	 * Deletes the positions with the primary key from the database. Also notifies the appropriate model listeners.
@@ -217,6 +215,10 @@ public interface PositionsLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Positions> getNotArchivedPositionses(
+		long isArchived, int start, int end);
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -267,6 +269,8 @@ public interface PositionsLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPositionsesCount();
 
+	public void recoverPosition(long positionId) throws PortalException;
+
 	public Positions updatePositions(
 			long positionId, String name, long salary,
 			ServiceContext serviceContext)
@@ -285,7 +289,4 @@ public interface PositionsLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Positions updatePositions(Positions positions);
 
-    List<Positions> getNotArchivedPositionses(long isArchived, int start, int end);
-
-	void recoverPosition(long id) throws PortalException;
 }

@@ -14,12 +14,9 @@
 
 package DataBase.service;
 
-import DataBase.model.Positions;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
-
-import java.util.List;
 
 /**
  * Provides the local service utility for Positions. This utility wraps
@@ -94,6 +91,12 @@ public class PositionsLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().deletePersistedModel(persistedModel);
+	}
+
+	public static DataBase.model.Positions deletePosition(long positionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().deletePosition(positionId);
 	}
 
 	public static DataBase.model.Positions deletePosition(
@@ -247,6 +250,12 @@ public class PositionsLocalServiceUtil {
 		return getService().getIndexableActionableDynamicQuery();
 	}
 
+	public static java.util.List<DataBase.model.Positions>
+		getNotArchivedPositionses(long isArchived, int start, int end) {
+
+		return getService().getNotArchivedPositionses(isArchived, start, end);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -309,6 +318,12 @@ public class PositionsLocalServiceUtil {
 		return getService().getPositionsesCount();
 	}
 
+	public static void recoverPosition(long positionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		getService().recoverPosition(positionId);
+	}
+
 	public static DataBase.model.Positions updatePositions(
 			long positionId, String name, long salary,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -356,7 +371,4 @@ public class PositionsLocalServiceUtil {
 		_serviceTracker = serviceTracker;
 	}
 
-    public static List<Positions> getNotArchivedPositionses(long isArchived, int start, int end) {
-		return getService().getNotArchivedPositionses(isArchived,start,end);
-    }
 }

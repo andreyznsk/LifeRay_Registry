@@ -14,12 +14,9 @@
 
 package DataBase.service;
 
-import DataBase.model.Employee;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
-
-import java.util.List;
 
 /**
  * Provides the local service utility for Employee. This utility wraps
@@ -303,6 +300,18 @@ public class EmployeeLocalServiceUtil {
 		return getService().getIndexableActionableDynamicQuery();
 	}
 
+	public static java.util.List<DataBase.model.Employee> getNotAchiveEmployee(
+		int i, int i1, int i2) {
+
+		return getService().getNotAchiveEmployee(i, i1, i2);
+	}
+
+	public static java.util.List<DataBase.model.Employee>
+		getNotArchivedEmployee(long isArchived, int start, int end) {
+
+		return getService().getNotArchivedEmployee(isArchived, start, end);
+	}
+
 	public static java.util.List<DataBase.model.Employee> getNotArchiveEmployee(
 		int isArchived, int start, int end) {
 
@@ -381,7 +390,4 @@ public class EmployeeLocalServiceUtil {
 		_serviceTracker = serviceTracker;
 	}
 
-	public static List<Employee> getNotAchiveEmployee(int archive, int start, int end) {
-		return getService().getNotArchiveEmployee(0,start,end);
-	}
 }
