@@ -15,6 +15,7 @@
 package DataBase.service;
 
 import DataBase.exception.NoSuchEmployeeException;
+
 import DataBase.model.Employee;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -204,6 +205,9 @@ public interface EmployeeLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEmpByBank(long bankId);
+
 	/**
 	 * Returns the employee with the primary key.
 	 *
@@ -281,7 +285,9 @@ public interface EmployeeLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Employee updateEmployee(Employee employee);
 
-    List<Employee> getEmpByBank(long bankId);
+	public void updateEmployee(
+			long userId, String[] strings, Date[] dates, long[] numbers,
+			ServiceContext serviceContext)
+		throws NoSuchEmployeeException;
 
-	void updateEmployee(long userId, String[] strings, Date[] dates, long[] numbers, ServiceContext serviceContext) throws NoSuchEmployeeException;
 }

@@ -14,12 +14,9 @@
 
 package DataBase.service;
 
-import DataBase.model.Employee;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
-
-import java.util.List;
 
 /**
  * Provides the local service utility for Employee. This utility wraps
@@ -226,6 +223,12 @@ public class EmployeeLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static java.util.List<DataBase.model.Employee> getEmpByBank(
+		long bankId) {
+
+		return getService().getEmpByBank(bankId);
+	}
+
 	/**
 	 * Returns the employee with the primary key.
 	 *
@@ -332,6 +335,16 @@ public class EmployeeLocalServiceUtil {
 		return getService().updateEmployee(employee);
 	}
 
+	public static void updateEmployee(
+			long userId, String[] strings, java.util.Date[] dates,
+			long[] numbers,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws DataBase.exception.NoSuchEmployeeException {
+
+		getService().updateEmployee(
+			userId, strings, dates, numbers, serviceContext);
+	}
+
 	public static EmployeeLocalService getService() {
 		return _serviceTracker.getService();
 	}
@@ -353,7 +366,4 @@ public class EmployeeLocalServiceUtil {
 		_serviceTracker = serviceTracker;
 	}
 
-	public static List<Employee> getEmpByBank(long bankId) {
-		return getService().getEmpByBank(bankId);
-	}
 }

@@ -11,6 +11,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import newModule.constants.NewModulePortletKeys;
@@ -52,7 +53,7 @@ import java.util.logging.Logger;
 	service = Portlet.class
 )
 
-//=====================================Методы работы с должностями=====================================================
+//=====================================Методы работы с сотрудниками=====================================================
 
 public class NewModulePortlet extends MVCPortlet {
 	public void addEmployee(ActionRequest request, ActionResponse response) throws PortalException {
@@ -89,6 +90,7 @@ public class NewModulePortlet extends MVCPortlet {
 					strings,dates,numbers,
 					serviceContext);
 			System.out.println("Add emp ok!");
+			SessionMessages.add(request, "employeeAdded");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -134,6 +136,7 @@ public class NewModulePortlet extends MVCPortlet {
 					strings,dates,numbers,
 					serviceContext);
 			System.out.println("Add emp ok!");
+			SessionMessages.add(request, "employeeUpdated");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -159,6 +162,7 @@ public class NewModulePortlet extends MVCPortlet {
 		try {
 			_bankLocalServices.addBank(serviceContext.getUserId(),bankName,bankAddress,bic,serviceContext);
 			System.out.println("Add bank ok!");
+			SessionMessages.add(request, "bankAdded");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -180,7 +184,8 @@ public class NewModulePortlet extends MVCPortlet {
 
 		try {
 			_bankLocalServices.updateBank(id,bankName,bankAddress,-1l,serviceContext);
-			System.out.println("Add bank ok!");
+			System.out.println("Update bank ok!");
+			SessionMessages.add(request, "bankUpdated");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -203,6 +208,7 @@ public class NewModulePortlet extends MVCPortlet {
 			_bankLocalServices.deleteBank(id);
 			System.out.println(_bankLocalServices.getBank(id));
 			System.out.println("Delete bank ok!");
+			SessionMessages.add(request, "bankDeleted");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -228,6 +234,7 @@ public class NewModulePortlet extends MVCPortlet {
 		try {
 			_bankLocalServices.recoverBank(id);
 			System.out.println("Recover bank ok!");
+			SessionMessages.add(request, "bankRecovered");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -252,6 +259,7 @@ public class NewModulePortlet extends MVCPortlet {
 		try {
 			_positionLocalServices.addPositions(serviceContext.getUserId(),posissionName,salary,serviceContext);
 			System.out.println("Add position ok!");
+			SessionMessages.add(request, "positionAdded");
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -273,11 +281,16 @@ public class NewModulePortlet extends MVCPortlet {
 		try {
 
 			_employeeLocalService.deleteEmployee(empId);
+			SessionMessages.add(request, "positionDeleted");
 		}
 
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+			PortalUtil.copyRequestParameters(request, response);
+
 			Logger.getLogger(NewModulePortlet.class.getName()).log(
 					Level.SEVERE, null, e);
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_position.jsp");
 		}
 	}
 

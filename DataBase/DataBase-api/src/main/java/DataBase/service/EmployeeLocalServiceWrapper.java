@@ -14,13 +14,7 @@
 
 package DataBase.service;
 
-import DataBase.exception.NoSuchEmployeeException;
-import DataBase.model.Employee;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceWrapper;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Provides a wrapper for {@link EmployeeLocalService}.
@@ -236,6 +230,11 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.getActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<DataBase.model.Employee> getEmpByBank(long bankId) {
+		return _employeeLocalService.getEmpByBank(bankId);
+	}
+
 	/**
 	 * Returns the employee with the primary key.
 	 *
@@ -351,6 +350,17 @@ public class EmployeeLocalServiceWrapper
 	}
 
 	@Override
+	public void updateEmployee(
+			long userId, String[] strings, java.util.Date[] dates,
+			long[] numbers,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws DataBase.exception.NoSuchEmployeeException {
+
+		_employeeLocalService.updateEmployee(
+			userId, strings, dates, numbers, serviceContext);
+	}
+
+	@Override
 	public EmployeeLocalService getWrappedService() {
 		return _employeeLocalService;
 	}
@@ -358,15 +368,6 @@ public class EmployeeLocalServiceWrapper
 	@Override
 	public void setWrappedService(EmployeeLocalService employeeLocalService) {
 		_employeeLocalService = employeeLocalService;
-	}
-
-	@Override
-	public List<Employee> getEmpByBank(long bankId) {
-		return null;
-	}
-
-	@Override
-	public void updateEmployee(long userId, String[] strings, Date[] dates, long[] numbers, ServiceContext serviceContext) throws NoSuchEmployeeException {
 	}
 
 	private EmployeeLocalService _employeeLocalService;

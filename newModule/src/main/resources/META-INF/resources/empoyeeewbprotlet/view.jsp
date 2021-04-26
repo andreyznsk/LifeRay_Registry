@@ -27,7 +27,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
     <portlet:param name="mvcPath" value="/empoyeeewbprotlet/add_position.jsp"></portlet:param>
 </portlet:renderURL>
 
-
 <portlet:renderURL var="deleteBankURL">
     <portlet:param name="mvcPath" value="/empoyeeewbprotlet/edit_bank.jsp"></portlet:param>
 </portlet:renderURL>
@@ -40,6 +39,18 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
     <portlet:param name="mvcPath" value="/empoyeeewbprotlet/edit_employee.jsp"></portlet:param>
 </portlet:renderURL>
 
+
+<!--=====================Сообщения=============================================-->
+<liferay-ui:success key="employeeAdded" message="employee-added" />
+<liferay-ui:success key="employeeUpdated" message="employee-updated" />
+<liferay-ui:success key="employeeDeleted" message="employee-deleted" />
+<liferay-ui:success key="bankAdded" message="bank-added" />
+<liferay-ui:success key="bankUpdated" message="bank-updated" />
+<liferay-ui:success key="bankDeleted" message="bank-deleted" />
+<liferay-ui:success key="bankRecovered" message="bank-recovered" />
+<liferay-ui:success key="positionAdded" message="position-added" />
+<liferay-ui:success key="positionUpdated" message="position-updated" />
+<liferay-ui:success key="positionDeleted" message="position-deleted" />
 
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
@@ -54,7 +65,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 %>
 <liferay-ui:tabs names="Реестр сотрудников,Реестр должностей,Реестр банков">
     <liferay-ui:section>
-        <liferay-ui:search-container total="<%=employees.size()%>" var="searchContainer" delta="7" deltaConfigurable="true"
+        <liferay-ui:search-container total="<%=employees.size()%>" var="searchContainer" delta="10" deltaConfigurable="true"
           emptyResultsMessage="Нет данных, добавьте данные">
 
          <liferay-ui:search-container-results results="<%=ListUtil.subList(employees, searchContainer.getStart(),searchContainer.getEnd())%>" />
@@ -81,7 +92,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
                   <portlet:actionURL name="deleteEmployee" var="deleteEmployeeURL">
                       <portlet:param name="employeeId" value="${emp.prson_id}" />
                   </portlet:actionURL>
-                  <liferay-ui:icon-delete message="удалить" url="<%=deleteEmployeeURL.toString()%>" />
+                  <liferay-ui:icon-delete message="Отправить в архив" url="<%=deleteEmployeeURL.toString()%>" />
 
               </liferay-ui:icon-menu>
               </liferay-ui:search-container-column-text>
@@ -124,6 +135,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
                 <liferay-ui:search-container-column-text name="Адрес" value="${bank.address}"/>
                 <liferay-ui:search-container-column-text name="редактирование">
                     <liferay-ui:icon-menu>
+
                         <portlet:renderURL var="editBankURL">
                             <portlet:param name="mvcPath" value="/empoyeeewbprotlet/edit_bank.jsp"></portlet:param>
                             <portlet:param name="bankId" value="${bank.bank_id}" />
@@ -133,16 +145,18 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
                         </portlet:renderURL>
                         <liferay-ui:icon message="редактировать" url="<%=editBankURL.toString()%>" />
 
-                            <portlet:actionURL name="deleteBank" var="deleteBankURL">
+                        <portlet:actionURL name="deleteBank" var="deleteBankURL">
                                 <portlet:param name="bankId" value="${bank.bank_id}" />
                             </portlet:actionURL>
-                        <liferay-ui:icon-delete message="удалить" url="<%=deleteBankURL.toString()%>" />
+                        <liferay-ui:icon-delete message="Отправить в архив" url="<%=deleteBankURL.toString()%>" />
+
                         <portlet:renderURL var="showBankEmpURL">
                             <portlet:param name="mvcPath" value="/empoyeeewbprotlet/show_bank_emp.jsp"></portlet:param>
                             <portlet:param name="bankId" value="${bank.bank_id}" />
                             <portlet:param name="bankName" value="${bank.bankName}" />
                         </portlet:renderURL>
                         <liferay-ui:icon message="Показать сотрудников" url="<%=showBankEmpURL.toString()%>" />
+
                     </liferay-ui:icon-menu>
                 </liferay-ui:search-container-column-text>
             </liferay-ui:search-container-row>
