@@ -36,6 +36,10 @@
 			<finder-column name="Prson_id" />
 		</finder>
 
+		<finder name="IsArchive" return-type="Collection">
+			<finder-column name="IsArchive" />
+		</finder>
+
 		<!-- References -->
 
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
@@ -96,6 +100,10 @@
 
 		<finder name="Positions_id" return-type="Collection">
 			<finder-column name="Positions_id" />
+		</finder>
+
+		<finder name="IsArchive" return-type="Collection">
+			<finder-column name="is_Archive" />
 		</finder>
 
 		<!-- References -->

@@ -9,6 +9,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="DataBase.service.*" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.portlet.PortletURLUtil" %>
+<%@ page import="javax.portlet.PortletURL" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%
@@ -18,6 +20,11 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 <portlet:renderURL var="addEmployeeURL">
     <portlet:param name="mvcPath" value="/empoyeeewbprotlet/add_employee.jsp"></portlet:param>
 </portlet:renderURL>
+
+<portlet:renderURL var="recoverEmployeeURL">
+    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/recover_employee.jsp"></portlet:param>
+</portlet:renderURL>
+
 
 <portlet:renderURL var="addBankURL">
     <portlet:param name="mvcPath" value="/empoyeeewbprotlet/add_bank.jsp"></portlet:param>
@@ -32,13 +39,16 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 </portlet:renderURL>
 
 <portlet:renderURL var="recoverBankURL">
-    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/recoverBank.jsp"></portlet:param>
+    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/recover_Bank.jsp"></portlet:param>
 </portlet:renderURL>
 
 <portlet:renderURL var="editEmployeeURL">
     <portlet:param name="mvcPath" value="/empoyeeewbprotlet/edit_employee.jsp"></portlet:param>
 </portlet:renderURL>
 
+<portlet:renderURL var="recoverPositionURL">
+    <portlet:param name="mvcPath" value="/empoyeeewbprotlet/recover_Position.jsp"></portlet:param>
+</portlet:renderURL>
 
 <!--=====================Сообщения=============================================-->
 <liferay-ui:success key="employeeAdded" message="employee-added" />
@@ -59,13 +69,14 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 </p>
 
 <%
-  List<Employee> employees = EmployeeLocalServiceUtil.getEmployees(-1,-1);
+  List<Employee> employees = EmployeeLocalServiceUtil.getNotAchiveEmployee(0,-1,-1);
   List<Bank> banks = BankLocalServiceUtil.getBanks(-1,-1);
-  List<Positions> positions = PositionsLocalServiceUtil.getPositionses(-1,-1);
+  List<Positions> positions = PositionsLocalServiceUtil.getNotArchivedPositionses(0,-1,-1);
 %>
 <liferay-ui:tabs names="Реестр сотрудников,Реестр должностей,Реестр банков">
     <liferay-ui:section>
-        <liferay-ui:search-container total="<%=employees.size()%>" var="searchContainer" delta="10" deltaConfigurable="true"
+
+       <liferay-ui:search-container total="<%=employees.size()%>" var="searchContainer" delta="20" deltaConfigurable="true"
           emptyResultsMessage="Нет данных, добавьте данные">
 
          <liferay-ui:search-container-results results="<%=ListUtil.subList(employees, searchContainer.getStart(),searchContainer.getEnd())%>" />
@@ -103,10 +114,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
         <aui:button-row>
             <aui:button onClick="<%= addEmployeeURL.toString() %>" value="Добавить сотрудника"></aui:button>
         </aui:button-row>
-    </liferay-ui:section>
+
+        <aui:button-row>
+            <aui:button onClick="<%= recoverEmployeeURL.toString() %>" value="Восстановить сотркдника из архива"></aui:button>
+        </aui:button-row>
+
+</liferay-ui:section>
     <!--========================Реестр должностей========================================================= -->
     <liferay-ui:section>
-        <liferay-ui:search-container total="<%=positions.size()%>" var="searchContainer" delta="7" deltaConfigurable="true"
+        <liferay-ui:search-container total="<%=positions.size()%>" var="searchContainer" delta="20" deltaConfigurable="true"
                                      emptyResultsMessage="Oops. There Are No Users To Display, Please add Users">
 
             <liferay-ui:search-container-results results="<%=ListUtil.subList(positions, searchContainer.getStart(),searchContainer.getEnd())%>" />
@@ -115,6 +131,22 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
                 <liferay-ui:search-container-column-text name="Id должности" value="${pos.positions_id}"/>
                 <liferay-ui:search-container-column-text name="Название должности" value="${pos.position_name}"/>
                 <liferay-ui:search-container-column-text name="Зар. плата" value="${pos.salary}"/>
+                <liferay-ui:search-container-column-text name="редактирование">
+                    <liferay-ui:icon-menu>
+
+                        <portlet:renderURL var="editPositionURL">
+                            <portlet:param name="mvcPath" value="/empoyeeewbprotlet/edit_position.jsp"></portlet:param>
+                            <portlet:param name="positionId" value="${pos.positions_id}" />
+                        </portlet:renderURL>
+                        <liferay-ui:icon message="редактировать" url="<%=editPositionURL.toString()%>" />
+
+                        <portlet:actionURL name="deletePosition" var="deletePositionURL">
+                            <portlet:param name="positionId" value="${pos.positions_id}" />
+                        </portlet:actionURL>
+                        <liferay-ui:icon-delete message="Отправить в архив" url="<%=deletePositionURL.toString()%>" />
+
+                    </liferay-ui:icon-menu>
+                </liferay-ui:search-container-column-text>
             </liferay-ui:search-container-row>
             <liferay-ui:search-iterator />
         </liferay-ui:search-container>
@@ -122,10 +154,14 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
         <aui:button-row>
             <aui:button onClick="<%= addPositionURL.toString() %>" value="Добавить должность"></aui:button>
         </aui:button-row>
+
+        <aui:button-row>
+            <aui:button onClick="<%= recoverPositionURL.toString() %>" value="Восстановить из архива"></aui:button>
+        </aui:button-row>
     </liferay-ui:section>
     <!--========================Реестр банков========================================================= -->
     <liferay-ui:section>
-        <liferay-ui:search-container total="<%=banks.size()%>" var="searchContainer" delta="7" deltaConfigurable="true"
+        <liferay-ui:search-container total="<%=banks.size()%>" var="searchContainer" delta="10" deltaConfigurable="true"
                                      emptyResultsMessage="Oops. There Are No Users To Display, Please add Users">
             <liferay-ui:search-container-results results="<%=ListUtil.subList(banks, searchContainer.getStart(),searchContainer.getEnd())%>" />
             <liferay-ui:search-container-row className="DataBase.model.Bank" modelVar="bank" keyProperty="bank_id" >

@@ -14,7 +14,6 @@
 
 package DataBase.service.impl;
 
-import DataBase.model.Bank;
 import DataBase.model.Positions;
 import DataBase.service.base.PositionsLocalServiceBaseImpl;
 
@@ -94,5 +93,26 @@ public class PositionsLocalServiceImpl extends PositionsLocalServiceBaseImpl {
 
 	public int getPositionsCount() {
 		return positionsPersistence.countAll();
+	}
+
+
+	public List<Positions> getNotArchivedPositionses(long isArchived, int start, int end) {
+	 	return 	positionsPersistence.findByIsArchive(isArchived,start,end);
+	}
+
+
+	public Positions deletePosition(long positionId) throws PortalException {
+
+		Positions positions = getPositions(positionId);
+		positions.setIs_Archive(1);
+		positionsPersistence.update(positions);
+		return positions;
+	}
+
+
+	public void recoverPosition(long positionId) throws PortalException {
+		Positions positions = getPositions(positionId);
+		positions.setIs_Archive(0);
+		positionsPersistence.update(positions);
 	}
 }

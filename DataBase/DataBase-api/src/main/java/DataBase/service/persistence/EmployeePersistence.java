@@ -313,6 +313,149 @@ public interface EmployeePersistence extends BasePersistence<Employee> {
 	public int countByPrson_id(long Prson_id);
 
 	/**
+	 * Returns all the employees where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @return the matching employees
+	 */
+	public java.util.List<Employee> findByIsArchive(long IsArchive);
+
+	/**
+	 * Returns a range of all the employees where IsArchive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param IsArchive the is archive
+	 * @param start the lower bound of the range of employees
+	 * @param end the upper bound of the range of employees (not inclusive)
+	 * @return the range of matching employees
+	 */
+	public java.util.List<Employee> findByIsArchive(
+		long IsArchive, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the employees where IsArchive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param IsArchive the is archive
+	 * @param start the lower bound of the range of employees
+	 * @param end the upper bound of the range of employees (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching employees
+	 */
+	public java.util.List<Employee> findByIsArchive(
+		long IsArchive, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Employee>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the employees where IsArchive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param IsArchive the is archive
+	 * @param start the lower bound of the range of employees
+	 * @param end the upper bound of the range of employees (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching employees
+	 */
+	public java.util.List<Employee> findByIsArchive(
+		long IsArchive, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Employee>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching employee
+	 * @throws NoSuchEmployeeException if a matching employee could not be found
+	 */
+	public Employee findByIsArchive_First(
+			long IsArchive,
+			com.liferay.portal.kernel.util.OrderByComparator<Employee>
+				orderByComparator)
+		throws NoSuchEmployeeException;
+
+	/**
+	 * Returns the first employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching employee, or <code>null</code> if a matching employee could not be found
+	 */
+	public Employee fetchByIsArchive_First(
+		long IsArchive,
+		com.liferay.portal.kernel.util.OrderByComparator<Employee>
+			orderByComparator);
+
+	/**
+	 * Returns the last employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching employee
+	 * @throws NoSuchEmployeeException if a matching employee could not be found
+	 */
+	public Employee findByIsArchive_Last(
+			long IsArchive,
+			com.liferay.portal.kernel.util.OrderByComparator<Employee>
+				orderByComparator)
+		throws NoSuchEmployeeException;
+
+	/**
+	 * Returns the last employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching employee, or <code>null</code> if a matching employee could not be found
+	 */
+	public Employee fetchByIsArchive_Last(
+		long IsArchive,
+		com.liferay.portal.kernel.util.OrderByComparator<Employee>
+			orderByComparator);
+
+	/**
+	 * Returns the employees before and after the current employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param Prson_id the primary key of the current employee
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next employee
+	 * @throws NoSuchEmployeeException if a employee with the primary key could not be found
+	 */
+	public Employee[] findByIsArchive_PrevAndNext(
+			long Prson_id, long IsArchive,
+			com.liferay.portal.kernel.util.OrderByComparator<Employee>
+				orderByComparator)
+		throws NoSuchEmployeeException;
+
+	/**
+	 * Removes all the employees where IsArchive = &#63; from the database.
+	 *
+	 * @param IsArchive the is archive
+	 */
+	public void removeByIsArchive(long IsArchive);
+
+	/**
+	 * Returns the number of employees where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @return the number of matching employees
+	 */
+	public int countByIsArchive(long IsArchive);
+
+	/**
 	 * Caches the employee in the entity cache if it is enabled.
 	 *
 	 * @param employee the employee

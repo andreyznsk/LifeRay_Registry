@@ -107,6 +107,10 @@ public interface PositionsLocalService
 			ServiceContext serviceContext)
 		throws PortalException;
 
+	public Positions deletePosition(
+			long positionId)
+			throws PortalException;
+
 	/**
 	 * Deletes the positions with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
@@ -281,4 +285,7 @@ public interface PositionsLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Positions updatePositions(Positions positions);
 
+    List<Positions> getNotArchivedPositionses(long isArchived, int start, int end);
+
+	void recoverPosition(long id) throws PortalException;
 }

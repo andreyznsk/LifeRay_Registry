@@ -311,6 +311,14 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.getIndexableActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<DataBase.model.Employee> getNotArchiveEmployee(
+		int isArchived, int start, int end) {
+
+		return _employeeLocalService.getNotArchiveEmployee(
+			isArchived, start, end);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -330,6 +338,13 @@ public class EmployeeLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _employeeLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public void recoverEmployee(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_employeeLocalService.recoverEmployee(id);
 	}
 
 	/**

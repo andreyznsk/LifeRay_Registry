@@ -168,6 +168,13 @@ public class PositionsPersistenceTest {
 	}
 
 	@Test
+	public void testCountByIsArchive() throws Exception {
+		_persistence.countByIsArchive(RandomTestUtil.nextLong());
+
+		_persistence.countByIsArchive(0L);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		Positions newPositions = addPositions();
 

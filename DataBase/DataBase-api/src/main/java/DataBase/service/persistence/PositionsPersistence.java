@@ -314,6 +314,149 @@ public interface PositionsPersistence extends BasePersistence<Positions> {
 	public int countByPositions_id(long Positions_id);
 
 	/**
+	 * Returns all the positionses where is_Archive = &#63;.
+	 *
+	 * @param is_Archive the is_ archive
+	 * @return the matching positionses
+	 */
+	public java.util.List<Positions> findByIsArchive(long is_Archive);
+
+	/**
+	 * Returns a range of all the positionses where is_Archive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PositionsModelImpl</code>.
+	 * </p>
+	 *
+	 * @param is_Archive the is_ archive
+	 * @param start the lower bound of the range of positionses
+	 * @param end the upper bound of the range of positionses (not inclusive)
+	 * @return the range of matching positionses
+	 */
+	public java.util.List<Positions> findByIsArchive(
+		long is_Archive, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the positionses where is_Archive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PositionsModelImpl</code>.
+	 * </p>
+	 *
+	 * @param is_Archive the is_ archive
+	 * @param start the lower bound of the range of positionses
+	 * @param end the upper bound of the range of positionses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching positionses
+	 */
+	public java.util.List<Positions> findByIsArchive(
+		long is_Archive, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Positions>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the positionses where is_Archive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>PositionsModelImpl</code>.
+	 * </p>
+	 *
+	 * @param is_Archive the is_ archive
+	 * @param start the lower bound of the range of positionses
+	 * @param end the upper bound of the range of positionses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching positionses
+	 */
+	public java.util.List<Positions> findByIsArchive(
+		long is_Archive, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Positions>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first positions in the ordered set where is_Archive = &#63;.
+	 *
+	 * @param is_Archive the is_ archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching positions
+	 * @throws NoSuchPositionsException if a matching positions could not be found
+	 */
+	public Positions findByIsArchive_First(
+			long is_Archive,
+			com.liferay.portal.kernel.util.OrderByComparator<Positions>
+				orderByComparator)
+		throws NoSuchPositionsException;
+
+	/**
+	 * Returns the first positions in the ordered set where is_Archive = &#63;.
+	 *
+	 * @param is_Archive the is_ archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching positions, or <code>null</code> if a matching positions could not be found
+	 */
+	public Positions fetchByIsArchive_First(
+		long is_Archive,
+		com.liferay.portal.kernel.util.OrderByComparator<Positions>
+			orderByComparator);
+
+	/**
+	 * Returns the last positions in the ordered set where is_Archive = &#63;.
+	 *
+	 * @param is_Archive the is_ archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching positions
+	 * @throws NoSuchPositionsException if a matching positions could not be found
+	 */
+	public Positions findByIsArchive_Last(
+			long is_Archive,
+			com.liferay.portal.kernel.util.OrderByComparator<Positions>
+				orderByComparator)
+		throws NoSuchPositionsException;
+
+	/**
+	 * Returns the last positions in the ordered set where is_Archive = &#63;.
+	 *
+	 * @param is_Archive the is_ archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching positions, or <code>null</code> if a matching positions could not be found
+	 */
+	public Positions fetchByIsArchive_Last(
+		long is_Archive,
+		com.liferay.portal.kernel.util.OrderByComparator<Positions>
+			orderByComparator);
+
+	/**
+	 * Returns the positionses before and after the current positions in the ordered set where is_Archive = &#63;.
+	 *
+	 * @param Positions_id the primary key of the current positions
+	 * @param is_Archive the is_ archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next positions
+	 * @throws NoSuchPositionsException if a positions with the primary key could not be found
+	 */
+	public Positions[] findByIsArchive_PrevAndNext(
+			long Positions_id, long is_Archive,
+			com.liferay.portal.kernel.util.OrderByComparator<Positions>
+				orderByComparator)
+		throws NoSuchPositionsException;
+
+	/**
+	 * Removes all the positionses where is_Archive = &#63; from the database.
+	 *
+	 * @param is_Archive the is_ archive
+	 */
+	public void removeByIsArchive(long is_Archive);
+
+	/**
+	 * Returns the number of positionses where is_Archive = &#63;.
+	 *
+	 * @param is_Archive the is_ archive
+	 * @return the number of matching positionses
+	 */
+	public int countByIsArchive(long is_Archive);
+
+	/**
 	 * Caches the positions in the entity cache if it is enabled.
 	 *
 	 * @param positions the positions

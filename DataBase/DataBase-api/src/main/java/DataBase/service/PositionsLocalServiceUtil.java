@@ -14,9 +14,12 @@
 
 package DataBase.service;
 
+import DataBase.model.Positions;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
+
+import java.util.List;
 
 /**
  * Provides the local service utility for Positions. This utility wraps
@@ -353,4 +356,7 @@ public class PositionsLocalServiceUtil {
 		_serviceTracker = serviceTracker;
 	}
 
+    public static List<Positions> getNotArchivedPositionses(long isArchived, int start, int end) {
+		return getService().getNotArchivedPositionses(isArchived,start,end);
+    }
 }

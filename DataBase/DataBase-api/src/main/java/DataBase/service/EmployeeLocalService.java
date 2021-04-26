@@ -257,6 +257,10 @@ public interface EmployeeLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
+
+	public List<Employee> getNotArchiveEmployee(
+		int isArchived, int start, int end);
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -271,6 +275,8 @@ public interface EmployeeLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	public void recoverEmployee(long id) throws PortalException;
 
 	/**
 	 * Updates the employee in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
@@ -289,5 +295,4 @@ public interface EmployeeLocalService
 			long userId, String[] strings, Date[] dates, long[] numbers,
 			ServiceContext serviceContext)
 		throws NoSuchEmployeeException;
-
 }

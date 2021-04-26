@@ -1,12 +1,9 @@
 package newModule.portlet;
-import DataBase.model.Bank;
 import DataBase.model.Employee;
-import DataBase.model.impl.EmployeeImpl;
 
+import DataBase.model.Positions;
 import DataBase.service.*;
-import DataBase.service.impl.EmployeeLocalServiceImpl;
 import com.liferay.contacts.model.Entry;
-import com.liferay.contacts.service.EntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -24,11 +21,9 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -148,6 +143,47 @@ public class NewModulePortlet extends MVCPortlet {
 		}
 	}
 
+	public void deleteEmployee(ActionRequest request, ActionResponse response) throws PortalException {
+		long empId = ParamUtil.getLong(request, "employeeId");
+		System.out.println(empId);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				Entry.class.getName(), request);
+
+		try {
+			_employeeLocalService.deleteEmployee(empId);
+			SessionMessages.add(request, "positionDeleted");
+		}
+
+		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+			PortalUtil.copyRequestParameters(request, response);
+
+			Logger.getLogger(NewModulePortlet.class.getName()).log(
+					Level.SEVERE, null, e);
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/view.jsp");
+		}
+	}
+
+	public void recoverEmployee(ActionRequest request, ActionResponse response) throws PortalException{
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				Entry.class.getName(), request);
+		long id = ParamUtil.getLong(request,"employeeId",-1);
+		System.out.println("id: " + id);
+
+		try {
+			_employeeLocalService.recoverEmployee(id);
+			System.out.println("Recover Employee ok!");
+			SessionMessages.add(request, "employeeRecovered");
+		}
+		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+			PortalUtil.copyRequestParameters(request, response);
+			System.out.println("Exception");
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/recover_employee.jsp");
+		}
+	}
 	// =======================================Методы для работы с банками======================================
 
 	public void addBank(ActionRequest request, ActionResponse response) throws PortalException {
@@ -178,6 +214,7 @@ public class NewModulePortlet extends MVCPortlet {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				Entry.class.getName(), request);
 		long id = ParamUtil.getLong(request,"bankId",-1);
+
 		System.out.println("id: " + id);
 		String bankName = ParamUtil.getString(request, "Название банка");
 		String bankAddress = ParamUtil.getString(request, "Адрес Банка");
@@ -271,29 +308,75 @@ public class NewModulePortlet extends MVCPortlet {
 		}
 	}
 
-
-	public void deleteEmployee(ActionRequest request, ActionResponse response) throws PortalException {
-		long empId = ParamUtil.getLong(request, "employId");
+	public void editPosition(ActionRequest request, ActionResponse response) throws PortalException {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				Entry.class.getName(), request);
+		long id = ParamUtil.getLong(request,"positionId",-1);
+		System.out.println("id: " + id);
+		String posissionName = ParamUtil.getString(request, "Название");
+		long salary = ParamUtil.getLong(request, "Зар.Плата");
 
 		try {
-
-			_employeeLocalService.deleteEmployee(empId);
-			SessionMessages.add(request, "positionDeleted");
+			_positionLocalServices.updatePositions(id,posissionName,salary,serviceContext);
+			System.out.println("Update position ok!");
+			SessionMessages.add(request, "positionUpdated");
 		}
-
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
 			PortalUtil.copyRequestParameters(request, response);
-
-			Logger.getLogger(NewModulePortlet.class.getName()).log(
-					Level.SEVERE, null, e);
-			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_position.jsp");
+			System.out.println("Exception");
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/add_bank.jsp");
 		}
+
 	}
 
+
+	public void deletePosition(ActionRequest request, ActionResponse response) throws PortalException {
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				Entry.class.getName(), request);
+		long id = ParamUtil.getLong(request,"positionId",-1);
+		System.out.println("id: " + id);
+
+		try {
+			_positionLocalServices.deletePosition(id);
+			System.out.println("Delete position ok!");
+			SessionMessages.add(request, "positionDeleted");
+		}
+		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+			PortalUtil.copyRequestParameters(request, response);
+			System.out.println("Exception");
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/view.jsp");
+		}
+
+	}
+
+	public void recoverPosition(ActionRequest request, ActionResponse response) throws PortalException{
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				Entry.class.getName(), request);
+		long id = ParamUtil.getLong(request,"positionId",-1);
+		System.out.println("id: " + id);
+
+		try {
+			_positionLocalServices.recoverPosition(id);
+			System.out.println("Recover position ok!");
+			SessionMessages.add(request, "positionRecovered");
+		}
+		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+			PortalUtil.copyRequestParameters(request, response);
+			System.out.println("Exception");
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			response.setRenderParameter("mvcPath", "/empoyeeewbprotlet/reciver_position.jsp");
+		}
+	}
 
 
 	@Reference(unbind = "-")

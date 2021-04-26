@@ -436,6 +436,174 @@ public class EmployeeUtil {
 	}
 
 	/**
+	 * Returns all the employees where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @return the matching employees
+	 */
+	public static List<Employee> findByIsArchive(long IsArchive) {
+		return getPersistence().findByIsArchive(IsArchive);
+	}
+
+	/**
+	 * Returns a range of all the employees where IsArchive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param IsArchive the is archive
+	 * @param start the lower bound of the range of employees
+	 * @param end the upper bound of the range of employees (not inclusive)
+	 * @return the range of matching employees
+	 */
+	public static List<Employee> findByIsArchive(
+		long IsArchive, int start, int end) {
+
+		return getPersistence().findByIsArchive(IsArchive, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the employees where IsArchive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param IsArchive the is archive
+	 * @param start the lower bound of the range of employees
+	 * @param end the upper bound of the range of employees (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching employees
+	 */
+	public static List<Employee> findByIsArchive(
+		long IsArchive, int start, int end,
+		OrderByComparator<Employee> orderByComparator) {
+
+		return getPersistence().findByIsArchive(
+			IsArchive, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the employees where IsArchive = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>EmployeeModelImpl</code>.
+	 * </p>
+	 *
+	 * @param IsArchive the is archive
+	 * @param start the lower bound of the range of employees
+	 * @param end the upper bound of the range of employees (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching employees
+	 */
+	public static List<Employee> findByIsArchive(
+		long IsArchive, int start, int end,
+		OrderByComparator<Employee> orderByComparator, boolean useFinderCache) {
+
+		return getPersistence().findByIsArchive(
+			IsArchive, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching employee
+	 * @throws NoSuchEmployeeException if a matching employee could not be found
+	 */
+	public static Employee findByIsArchive_First(
+			long IsArchive, OrderByComparator<Employee> orderByComparator)
+		throws DataBase.exception.NoSuchEmployeeException {
+
+		return getPersistence().findByIsArchive_First(
+			IsArchive, orderByComparator);
+	}
+
+	/**
+	 * Returns the first employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching employee, or <code>null</code> if a matching employee could not be found
+	 */
+	public static Employee fetchByIsArchive_First(
+		long IsArchive, OrderByComparator<Employee> orderByComparator) {
+
+		return getPersistence().fetchByIsArchive_First(
+			IsArchive, orderByComparator);
+	}
+
+	/**
+	 * Returns the last employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching employee
+	 * @throws NoSuchEmployeeException if a matching employee could not be found
+	 */
+	public static Employee findByIsArchive_Last(
+			long IsArchive, OrderByComparator<Employee> orderByComparator)
+		throws DataBase.exception.NoSuchEmployeeException {
+
+		return getPersistence().findByIsArchive_Last(
+			IsArchive, orderByComparator);
+	}
+
+	/**
+	 * Returns the last employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching employee, or <code>null</code> if a matching employee could not be found
+	 */
+	public static Employee fetchByIsArchive_Last(
+		long IsArchive, OrderByComparator<Employee> orderByComparator) {
+
+		return getPersistence().fetchByIsArchive_Last(
+			IsArchive, orderByComparator);
+	}
+
+	/**
+	 * Returns the employees before and after the current employee in the ordered set where IsArchive = &#63;.
+	 *
+	 * @param Prson_id the primary key of the current employee
+	 * @param IsArchive the is archive
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next employee
+	 * @throws NoSuchEmployeeException if a employee with the primary key could not be found
+	 */
+	public static Employee[] findByIsArchive_PrevAndNext(
+			long Prson_id, long IsArchive,
+			OrderByComparator<Employee> orderByComparator)
+		throws DataBase.exception.NoSuchEmployeeException {
+
+		return getPersistence().findByIsArchive_PrevAndNext(
+			Prson_id, IsArchive, orderByComparator);
+	}
+
+	/**
+	 * Removes all the employees where IsArchive = &#63; from the database.
+	 *
+	 * @param IsArchive the is archive
+	 */
+	public static void removeByIsArchive(long IsArchive) {
+		getPersistence().removeByIsArchive(IsArchive);
+	}
+
+	/**
+	 * Returns the number of employees where IsArchive = &#63;.
+	 *
+	 * @param IsArchive the is archive
+	 * @return the number of matching employees
+	 */
+	public static int countByIsArchive(long IsArchive) {
+		return getPersistence().countByIsArchive(IsArchive);
+	}
+
+	/**
 	 * Caches the employee in the entity cache if it is enabled.
 	 *
 	 * @param employee the employee

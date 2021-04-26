@@ -50,6 +50,12 @@ import java.util.List;
 )
 public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 
+
+	public List<Employee> getNotArchiveEmployee(int isArchived, int start, int end){
+		System.out.println("is archived:" + isArchived);
+		return employeePersistence.findByIsArchive(isArchived,start,end);
+	}
+
 	public Employee addEmployee(
 			long userId,
 			String[] strings,
@@ -133,6 +139,21 @@ public class EmployeeLocalServiceImpl extends EmployeeLocalServiceBaseImpl {
 
 	}
 
+	public Employee deleteEmployee(long Prson_id) throws PortalException{
+		System.out.println(Prson_id);
+		Employee employee = employeePersistence.findByPrimaryKey(Prson_id);
+		employee.setIsArchive(1);
+		employeePersistence.update(employee);
+		return employee;
+	}
+
+
+	public void recoverEmployee(long id) throws PortalException{
+		System.out.println(id);
+		Employee employee = employeePersistence.findByPrimaryKey(id);
+		employee.setIsArchive(0);
+		employeePersistence.update(employee);
+	}
 
 
 	protected void validate(String name, String entry)

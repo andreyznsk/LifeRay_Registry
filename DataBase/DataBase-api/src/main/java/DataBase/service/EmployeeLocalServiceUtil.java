@@ -14,9 +14,12 @@
 
 package DataBase.service;
 
+import DataBase.model.Employee;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
+
+import java.util.List;
 
 /**
  * Provides the local service utility for Employee. This utility wraps
@@ -300,6 +303,12 @@ public class EmployeeLocalServiceUtil {
 		return getService().getIndexableActionableDynamicQuery();
 	}
 
+	public static java.util.List<DataBase.model.Employee> getNotArchiveEmployee(
+		int isArchived, int start, int end) {
+
+		return getService().getNotArchiveEmployee(isArchived, start, end);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -317,6 +326,12 @@ public class EmployeeLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static void recoverEmployee(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		getService().recoverEmployee(id);
 	}
 
 	/**
@@ -366,4 +381,7 @@ public class EmployeeLocalServiceUtil {
 		_serviceTracker = serviceTracker;
 	}
 
+	public static List<Employee> getNotAchiveEmployee(int archive, int start, int end) {
+		return getService().getNotArchiveEmployee(0,start,end);
+	}
 }

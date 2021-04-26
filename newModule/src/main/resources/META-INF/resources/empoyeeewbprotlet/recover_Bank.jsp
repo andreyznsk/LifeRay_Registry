@@ -11,10 +11,6 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%
-SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
-%>
-
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <p>
@@ -22,6 +18,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 </p>
 
 <h2>Восстановить из архива</h2>
+
+<liferay-ui:success key="bankRecovered" message="bank-recovered" />
 
 <%
   List<Bank> banks = BankLocalServiceUtil.getArchivedBanks();
