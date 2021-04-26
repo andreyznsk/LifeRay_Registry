@@ -51,6 +51,9 @@ import java.util.logging.Logger;
 //=====================================Методы работы с сотрудниками=====================================================
 
 public class NewModulePortlet extends MVCPortlet {
+
+	DateFormat sdf = new SimpleDateFormat("y-M-d");
+
 	public void addEmployee(ActionRequest request, ActionResponse response) throws PortalException {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -60,7 +63,6 @@ public class NewModulePortlet extends MVCPortlet {
 		Date[] dates = new Date[2];
 		long[] numbers = new long[3];
 
-		DateFormat sdf = new SimpleDateFormat("y-M-d");
 		strings[0] = ParamUtil.getString(request, "Имя");
 		strings[1] = ParamUtil.getString(request, "Фамилия");
 		strings[2] = ParamUtil.getString(request, "Отчество");

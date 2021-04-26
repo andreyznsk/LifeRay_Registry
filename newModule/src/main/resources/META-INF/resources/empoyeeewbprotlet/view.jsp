@@ -11,10 +11,11 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.portlet.PortletURLUtil" %>
 <%@ page import="javax.portlet.PortletURL" %>
+<%@ page import="java.text.DateFormat" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%
-SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
+    DateFormat sdf = new SimpleDateFormat("y-MM-dd");
 %>
 
 <portlet:renderURL var="addEmployeeURL">
@@ -75,25 +76,31 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
   List<Employee> employees = EmployeeLocalServiceUtil.getNotAchiveEmployee(0,-1,-1);
   List<Bank> banks = BankLocalServiceUtil.getBanks(-1,-1);
   List<Positions> positions = PositionsLocalServiceUtil.getNotArchivedPositionses(0,-1,-1);
+  PortletURL thisURL = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 %>
+
 <liferay-ui:tabs names="Реестр сотрудников,Реестр должностей,Реестр банков">
     <liferay-ui:section>
 
-       <liferay-ui:search-container total="<%=employees.size()%>" var="searchContainer" delta="20" deltaConfigurable="true"
-          emptyResultsMessage="Нет данных, добавьте данные">
+        <liferay-ui:search-container iteratorURL="<%= thisURL %>" emptyResultsMessage="Нет сотрудников в архиве, добавьте сотружников"
+        delta="20" deltaConfigurable="true">
+        <%
+            searchContainer.setResults(employees);
+            searchContainer.setTotal(employees.size());
+        %>
 
-         <liferay-ui:search-container-results results="<%=ListUtil.subList(employees, searchContainer.getStart(),searchContainer.getEnd())%>" />
+         <liferay-ui:search-container-results results="<%=ListUtil.subList(employees,searchContainer.getStart(),searchContainer.getEnd())%>" />
 
-          <liferay-ui:search-container-row className="DataBase.model.Employee" modelVar="emp" keyProperty="prson_id" >
-                <liferay-ui:search-container-column-text name="Id работника" value="${emp.prson_id}"/>
-                <liferay-ui:search-container-column-text name="Имя" value="${emp.firstName}"/>
-                <liferay-ui:search-container-column-text name="Фамилия" value="${emp.lastName}"/>
-                <liferay-ui:search-container-column-text name="Дата рождения" value="${emp.date_of_birth}" />
-                <liferay-ui:search-container-column-text name="Дата начала работы" value="${emp.date_of_start_work}" />
-                <liferay-ui:search-container-column-text name="Рабочий телефон" value="${emp.workNumber}" />
-                <liferay-ui:search-container-column-text name="Домашний номер" value="${emp.homeNumber}" />
-                <liferay-ui:search-container-column-text name="Должность" value="${emp.position_Id}" />
-                <liferay-ui:search-container-column-text name="Обслуживающий банк" value="${emp.bank_id}" />
+          <liferay-ui:search-container-row className="DataBase.model.Employee">
+                <liferay-ui:search-container-column-text name="Id работника" value="<%=String.valueOf(model.getPrson_id())%>"/>
+                <liferay-ui:search-container-column-text name="Имя" value="<%=model.getFirstName()%>"/>
+                <liferay-ui:search-container-column-text name="Фамилия" value="<%=model.getLastName()%>"/>
+                <liferay-ui:search-container-column-text name="Дата рождения" value="<%=sdf.format(model.getDate_of_birth())%>" />
+                <liferay-ui:search-container-column-text name="Дата начала работы" value="<%=sdf.format(model.getDate_of_start_work())%>" />
+                <liferay-ui:search-container-column-text name="Рабочий телефон" value="<%=String.valueOf(model.getWorkNumber())%>" />
+                <liferay-ui:search-container-column-text name="Домашний номер" value="<%=String.valueOf(model.getHomeNumber())%>" />
+                <liferay-ui:search-container-column-text name="Должность" value="<%=PositionsLocalServiceUtil.getPositions(model.getPosition_Id()).getPosition_name()%>" />
+                <liferay-ui:search-container-column-text name="Обслуживающий банк" value="<%=BankLocalServiceUtil.getBank(model.getBank_id()).getBankName()%>" />
               <liferay-ui:search-container-column-text name="редактирование">
               <liferay-ui:icon-menu>
 
@@ -126,7 +133,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
     <!--========================Реестр должностей========================================================= -->
     <liferay-ui:section>
         <liferay-ui:search-container total="<%=positions.size()%>" var="searchContainer" delta="20" deltaConfigurable="true"
-                                     emptyResultsMessage="Oops. There Are No Users To Display, Please add Users">
+                                     emptyResultsMessage="Нет должностей в реестре, добавьте должность">
 
             <liferay-ui:search-container-results results="<%=ListUtil.subList(positions, searchContainer.getStart(),searchContainer.getEnd())%>" />
 
