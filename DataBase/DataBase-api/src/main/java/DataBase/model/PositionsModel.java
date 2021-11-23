@@ -116,14 +116,13 @@ public interface PositionsModel extends BaseModel<Positions> {
 	 *
 	 * @return the salary of this positions
 	 */
-	@AutoEscape
-	public String getSalary();
+	public long getSalary();
 
 	/**
 	 * Sets the salary of this positions.
 	 *
 	 * @param Salary the salary of this positions
 	 */
-	public void setSalary(String Salary);
+	public void setSalary(long Salary);
 
 }

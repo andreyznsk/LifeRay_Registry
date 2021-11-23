@@ -130,7 +130,7 @@ public class PositionsPersistenceTest {
 
 		newPositions.setIs_Archive(RandomTestUtil.nextLong());
 
-		newPositions.setSalary(RandomTestUtil.randomString());
+		newPositions.setSalary(RandomTestUtil.nextLong());
 
 		_positionses.add(_persistence.update(newPositions));
 
@@ -165,6 +165,13 @@ public class PositionsPersistenceTest {
 		_persistence.countByPositions_id(RandomTestUtil.nextLong());
 
 		_persistence.countByPositions_id(0L);
+	}
+
+	@Test
+	public void testCountByIsArchive() throws Exception {
+		_persistence.countByIsArchive(RandomTestUtil.nextLong());
+
+		_persistence.countByIsArchive(0L);
 	}
 
 	@Test
@@ -416,7 +423,7 @@ public class PositionsPersistenceTest {
 
 		positions.setIs_Archive(RandomTestUtil.nextLong());
 
-		positions.setSalary(RandomTestUtil.randomString());
+		positions.setSalary(RandomTestUtil.nextLong());
 
 		_positionses.add(_persistence.update(positions));
 

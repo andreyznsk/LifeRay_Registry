@@ -10,7 +10,6 @@
     <module>modules</module>
     <module>themes</module>
     <module>DataBase</module>
-    <module>DataBaseShow</module>
     <module>newModule</module>
   </modules>
   <properties>

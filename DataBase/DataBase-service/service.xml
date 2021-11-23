@@ -36,6 +36,18 @@
 			<finder-column name="Prson_id" />
 		</finder>
 
+		<finder name="IsArchive" return-type="Collection">
+			<finder-column name="IsArchive" />
+		</finder>
+
+		<finder name="Bank_id" return-type="Collection">
+			<finder-column name="Bank_id" />
+		</finder>
+
+		<finder name="Position_Id" return-type="Collection">
+			<finder-column name="Position_Id" />
+		</finder>
+
 		<!-- References -->
 
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
@@ -53,6 +65,8 @@
 		<column name="BankName" type="String" />
 		<column name="Bic" type="long" />
 		<column name="Address" type="String" />
+		<column name="isArchive" type="int" />
+
 
 		<!-- Order -->
 
@@ -82,7 +96,7 @@
 
 		<column name="Position_name" type="String" />
 		<column name="is_Archive" type="long" />
-		<column name="Salary" type="String" />
+		<column name="Salary" type="long" />
 
 		<!-- Order -->
 
@@ -96,9 +110,16 @@
 			<finder-column name="Positions_id" />
 		</finder>
 
+		<finder name="IsArchive" return-type="Collection">
+			<finder-column name="is_Archive" />
+		</finder>
+
 		<!-- References -->
 
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
 		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
 	</entity>
+	<exceptions>
+		<exception>EntryName</exception>
+	</exceptions>
 </service-builder>

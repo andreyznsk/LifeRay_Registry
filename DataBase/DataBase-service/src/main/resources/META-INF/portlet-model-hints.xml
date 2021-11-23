@@ -7,6 +7,7 @@
 		<field name="BankName" type="String" />
 		<field name="Bic" type="long" />
 		<field name="Address" type="String" />
+		<field name="isArchive" type="int" />
 	</model>
 	<model name="DataBase.model.Employee">
 		<field name="uuid" type="String" />
@@ -27,6 +28,6 @@
 		<field name="Positions_id" type="long" />
 		<field name="Position_name" type="String" />
 		<field name="is_Archive" type="long" />
-		<field name="Salary" type="String" />
+		<field name="Salary" type="long" />
 	</model>
 </model-hints>

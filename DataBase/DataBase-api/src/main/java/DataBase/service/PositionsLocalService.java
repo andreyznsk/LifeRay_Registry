@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -61,6 +62,10 @@ public interface PositionsLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>DataBase.service.impl.PositionsLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the positions local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link PositionsLocalServiceUtil} if injection and service tracking are not available.
 	 */
+	public Positions addPositions(
+			long positionId, String name, long salary,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Adds the positions to the database. Also notifies the appropriate model listeners.
@@ -95,6 +100,13 @@ public interface PositionsLocalService
 	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException;
+
+	public Positions deletePosition(long positionId) throws PortalException;
+
+	public Positions deletePosition(
+			long positionId, String name, long salary,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	/**
@@ -197,7 +209,15 @@ public interface PositionsLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Positions> getEntries(int start, int end)
+		throws SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Positions> getNotArchivedPositionses(
+		long isArchived, int start, int end);
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -224,6 +244,9 @@ public interface PositionsLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Positions getPositions(long Positions_id) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getPositionsCount();
+
 	/**
 	 * Returns a range of all the positionses.
 	 *
@@ -245,6 +268,13 @@ public interface PositionsLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPositionsesCount();
+
+	public void recoverPosition(long positionId) throws PortalException;
+
+	public Positions updatePositions(
+			long positionId, String name, long salary,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Updates the positions in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

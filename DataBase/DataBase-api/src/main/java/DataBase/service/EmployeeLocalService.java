@@ -14,6 +14,8 @@
 
 package DataBase.service;
 
+import DataBase.exception.NoSuchEmployeeException;
+
 import DataBase.model.Employee;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -27,6 +29,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -34,6 +37,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
@@ -74,6 +78,11 @@ public interface EmployeeLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Employee addEmployee(Employee employee);
+
+	public Employee addEmployee(
+			long userId, String[] strings, Date[] dates, long[] numbers,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.
@@ -196,6 +205,12 @@ public interface EmployeeLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEmpByBank(long bankId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEmpByPosition(long id);
+
 	/**
 	 * Returns the employee with the primary key.
 	 *
@@ -229,7 +244,33 @@ public interface EmployeeLocalService
 	public int getEmployeesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEntries(long employeeId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEntries(long employeeId, int start, int end)
+		throws SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getEntries(
+		long employeeId, int start, int end, OrderByComparator<Employee> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getEntriesCount(long employeeId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getNotAchiveEmployee(
+		int isArchived, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getNotArchivedEmployee(
+		long isArchived, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Employee> getNotArchiveEmployee(
+		int isArchived, int start, int end);
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -246,6 +287,8 @@ public interface EmployeeLocalService
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	public void recoverEmployee(long id) throws PortalException;
+
 	/**
 	 * Updates the employee in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
@@ -258,5 +301,10 @@ public interface EmployeeLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Employee updateEmployee(Employee employee);
+
+	public void updateEmployee(
+			long userId, String[] strings, Date[] dates, long[] numbers,
+			ServiceContext serviceContext)
+		throws NoSuchEmployeeException;
 
 }

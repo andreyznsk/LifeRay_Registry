@@ -54,6 +54,16 @@ public class EmployeeLocalServiceUtil {
 		return getService().addEmployee(employee);
 	}
 
+	public static DataBase.model.Employee addEmployee(
+			long userId, String[] strings, java.util.Date[] dates,
+			long[] numbers,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addEmployee(
+			userId, strings, dates, numbers, serviceContext);
+	}
+
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.
 	 *
@@ -213,6 +223,18 @@ public class EmployeeLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static java.util.List<DataBase.model.Employee> getEmpByBank(
+		long bankId) {
+
+		return getService().getEmpByBank(bankId);
+	}
+
+	public static java.util.List<DataBase.model.Employee> getEmpByPosition(
+		long id) {
+
+		return getService().getEmpByPosition(id);
+	}
+
 	/**
 	 * Returns the employee with the primary key.
 	 *
@@ -252,11 +274,54 @@ public class EmployeeLocalServiceUtil {
 		return getService().getEmployeesCount();
 	}
 
+	public static java.util.List<DataBase.model.Employee> getEntries(
+		long employeeId) {
+
+		return getService().getEntries(employeeId);
+	}
+
+	public static java.util.List<DataBase.model.Employee> getEntries(
+			long employeeId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return getService().getEntries(employeeId, start, end);
+	}
+
+	public static java.util.List<DataBase.model.Employee> getEntries(
+		long employeeId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<DataBase.model.Employee> obc) {
+
+		return getService().getEntries(employeeId, start, end, obc);
+	}
+
+	public static int getEntriesCount(long employeeId) {
+		return getService().getEntriesCount(employeeId);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {
 
 		return getService().getIndexableActionableDynamicQuery();
+	}
+
+	public static java.util.List<DataBase.model.Employee> getNotAchiveEmployee(
+		int isArchived, int start, int end) {
+
+		return getService().getNotAchiveEmployee(isArchived, start, end);
+	}
+
+	public static java.util.List<DataBase.model.Employee>
+		getNotArchivedEmployee(long isArchived, int start, int end) {
+
+		return getService().getNotArchivedEmployee(isArchived, start, end);
+	}
+
+	public static java.util.List<DataBase.model.Employee> getNotArchiveEmployee(
+		int isArchived, int start, int end) {
+
+		return getService().getNotArchiveEmployee(isArchived, start, end);
 	}
 
 	/**
@@ -278,6 +343,12 @@ public class EmployeeLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static void recoverEmployee(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		getService().recoverEmployee(id);
+	}
+
 	/**
 	 * Updates the employee in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
@@ -292,6 +363,16 @@ public class EmployeeLocalServiceUtil {
 		DataBase.model.Employee employee) {
 
 		return getService().updateEmployee(employee);
+	}
+
+	public static void updateEmployee(
+			long userId, String[] strings, java.util.Date[] dates,
+			long[] numbers,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws DataBase.exception.NoSuchEmployeeException {
+
+		getService().updateEmployee(
+			userId, strings, dates, numbers, serviceContext);
 	}
 
 	public static EmployeeLocalService getService() {

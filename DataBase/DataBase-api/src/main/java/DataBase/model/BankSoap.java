@@ -37,6 +37,7 @@ public class BankSoap implements Serializable {
 		soapModel.setBankName(model.getBankName());
 		soapModel.setBic(model.getBic());
 		soapModel.setAddress(model.getAddress());
+		soapModel.setIsArchive(model.getIsArchive());
 
 		return soapModel;
 	}
@@ -129,10 +130,19 @@ public class BankSoap implements Serializable {
 		_Address = Address;
 	}
 
+	public int getIsArchive() {
+		return _isArchive;
+	}
+
+	public void setIsArchive(int isArchive) {
+		_isArchive = isArchive;
+	}
+
 	private String _uuid;
 	private long _Bank_id;
 	private String _BankName;
 	private long _Bic;
 	private String _Address;
+	private int _isArchive;
 
 }

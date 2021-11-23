@@ -59,7 +59,7 @@ public class BankCacheModel implements CacheModel<Bank>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -71,6 +71,8 @@ public class BankCacheModel implements CacheModel<Bank>, Externalizable {
 		sb.append(Bic);
 		sb.append(", Address=");
 		sb.append(Address);
+		sb.append(", isArchive=");
+		sb.append(isArchive);
 		sb.append("}");
 
 		return sb.toString();
@@ -105,6 +107,8 @@ public class BankCacheModel implements CacheModel<Bank>, Externalizable {
 			bankImpl.setAddress(Address);
 		}
 
+		bankImpl.setIsArchive(isArchive);
+
 		bankImpl.resetOriginalValues();
 
 		return bankImpl;
@@ -119,6 +123,8 @@ public class BankCacheModel implements CacheModel<Bank>, Externalizable {
 
 		Bic = objectInput.readLong();
 		Address = objectInput.readUTF();
+
+		isArchive = objectInput.readInt();
 	}
 
 	@Override
@@ -147,6 +153,8 @@ public class BankCacheModel implements CacheModel<Bank>, Externalizable {
 		else {
 			objectOutput.writeUTF(Address);
 		}
+
+		objectOutput.writeInt(isArchive);
 	}
 
 	public String uuid;
@@ -154,5 +162,6 @@ public class BankCacheModel implements CacheModel<Bank>, Externalizable {
 	public String BankName;
 	public long Bic;
 	public String Address;
+	public int isArchive;
 
 }

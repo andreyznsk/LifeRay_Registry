@@ -122,11 +122,11 @@ public class PositionsSoap implements Serializable {
 		_is_Archive = is_Archive;
 	}
 
-	public String getSalary() {
+	public long getSalary() {
 		return _Salary;
 	}
 
-	public void setSalary(String Salary) {
+	public void setSalary(long Salary) {
 		_Salary = Salary;
 	}
 
@@ -134,6 +134,6 @@ public class PositionsSoap implements Serializable {
 	private long _Positions_id;
 	private String _Position_name;
 	private long _is_Archive;
-	private String _Salary;
+	private long _Salary;
 
 }

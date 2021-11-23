@@ -49,6 +49,17 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.addEmployee(employee);
 	}
 
+	@Override
+	public DataBase.model.Employee addEmployee(
+			long userId, String[] strings, java.util.Date[] dates,
+			long[] numbers,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _employeeLocalService.addEmployee(
+			userId, strings, dates, numbers, serviceContext);
+	}
+
 	/**
 	 * Creates a new employee with the primary key. Does not add the employee to the database.
 	 *
@@ -219,6 +230,16 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.getActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<DataBase.model.Employee> getEmpByBank(long bankId) {
+		return _employeeLocalService.getEmpByBank(bankId);
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getEmpByPosition(long id) {
+		return _employeeLocalService.getEmpByPosition(id);
+	}
+
 	/**
 	 * Returns the employee with the primary key.
 	 *
@@ -262,10 +283,61 @@ public class EmployeeLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<DataBase.model.Employee> getEntries(long employeeId) {
+		return _employeeLocalService.getEntries(employeeId);
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getEntries(
+			long employeeId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return _employeeLocalService.getEntries(employeeId, start, end);
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getEntries(
+		long employeeId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<DataBase.model.Employee> obc) {
+
+		return _employeeLocalService.getEntries(employeeId, start, end, obc);
+	}
+
+	@Override
+	public int getEntriesCount(long employeeId) {
+		return _employeeLocalService.getEntriesCount(employeeId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 
 		return _employeeLocalService.getIndexableActionableDynamicQuery();
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getNotAchiveEmployee(
+		int isArchived, int start, int end) {
+
+		return _employeeLocalService.getNotAchiveEmployee(
+			isArchived, start, end);
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getNotArchivedEmployee(
+		long isArchived, int start, int end) {
+
+		return _employeeLocalService.getNotArchivedEmployee(
+			isArchived, start, end);
+	}
+
+	@Override
+	public java.util.List<DataBase.model.Employee> getNotArchiveEmployee(
+		int isArchived, int start, int end) {
+
+		return _employeeLocalService.getNotArchiveEmployee(
+			isArchived, start, end);
 	}
 
 	/**
@@ -289,6 +361,13 @@ public class EmployeeLocalServiceWrapper
 		return _employeeLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public void recoverEmployee(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_employeeLocalService.recoverEmployee(id);
+	}
+
 	/**
 	 * Updates the employee in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
@@ -304,6 +383,17 @@ public class EmployeeLocalServiceWrapper
 		DataBase.model.Employee employee) {
 
 		return _employeeLocalService.updateEmployee(employee);
+	}
+
+	@Override
+	public void updateEmployee(
+			long userId, String[] strings, java.util.Date[] dates,
+			long[] numbers,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws DataBase.exception.NoSuchEmployeeException {
+
+		_employeeLocalService.updateEmployee(
+			userId, strings, dates, numbers, serviceContext);
 	}
 
 	@Override

@@ -196,6 +196,27 @@ public class EmployeePersistenceTest {
 	}
 
 	@Test
+	public void testCountByIsArchive() throws Exception {
+		_persistence.countByIsArchive(RandomTestUtil.nextLong());
+
+		_persistence.countByIsArchive(0L);
+	}
+
+	@Test
+	public void testCountByBank_id() throws Exception {
+		_persistence.countByBank_id(RandomTestUtil.nextLong());
+
+		_persistence.countByBank_id(0L);
+	}
+
+	@Test
+	public void testCountByPosition_Id() throws Exception {
+		_persistence.countByPosition_Id(RandomTestUtil.nextLong());
+
+		_persistence.countByPosition_Id(0L);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		Employee newEmployee = addEmployee();
 

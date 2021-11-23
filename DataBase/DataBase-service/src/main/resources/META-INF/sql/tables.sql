@@ -3,7 +3,8 @@ create table My_Bank (
 	Bank_id LONG not null primary key,
 	BankName VARCHAR(75) null,
 	Bic LONG,
-	Address VARCHAR(75) null
+	Address VARCHAR(75) null,
+	isArchive INTEGER
 );
 
 create table My_Employee (
@@ -26,5 +27,5 @@ create table My_Positions (
 	Positions_id LONG not null primary key,
 	Position_name VARCHAR(75) null,
 	is_Archive LONG,
-	Salary VARCHAR(75) null
+	Salary LONG
 );

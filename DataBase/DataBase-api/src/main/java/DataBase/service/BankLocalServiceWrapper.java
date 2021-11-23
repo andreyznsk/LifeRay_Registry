@@ -45,6 +45,16 @@ public class BankLocalServiceWrapper
 		return _bankLocalService.addBank(bank);
 	}
 
+	@Override
+	public DataBase.model.Bank addBank(
+			long bankId, String name, String address, long bic,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bankLocalService.addBank(
+			bankId, name, address, bic, serviceContext);
+	}
+
 	/**
 	 * Creates a new bank with the primary key. Does not add the bank to the database.
 	 *
@@ -98,6 +108,16 @@ public class BankLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _bankLocalService.deleteBank(Bank_id);
+	}
+
+	@Override
+	public DataBase.model.Bank deleteBank(
+			long bankId, String name, String address, long bic,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bankLocalService.deleteBank(
+			bankId, name, address, bic, serviceContext);
 	}
 
 	/**
@@ -212,6 +232,11 @@ public class BankLocalServiceWrapper
 		return _bankLocalService.getActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<DataBase.model.Bank> getArchivedBanks() {
+		return _bankLocalService.getArchivedBanks();
+	}
+
 	/**
 	 * Returns the bank with the primary key.
 	 *
@@ -253,6 +278,13 @@ public class BankLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<DataBase.model.Bank> getEntries(int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return _bankLocalService.getEntries(start, end);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 
@@ -280,6 +312,13 @@ public class BankLocalServiceWrapper
 		return _bankLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public void recoverBank(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_bankLocalService.recoverBank(id);
+	}
+
 	/**
 	 * Updates the bank in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
@@ -293,6 +332,16 @@ public class BankLocalServiceWrapper
 	@Override
 	public DataBase.model.Bank updateBank(DataBase.model.Bank bank) {
 		return _bankLocalService.updateBank(bank);
+	}
+
+	@Override
+	public DataBase.model.Bank updateBank(
+			long bankId, String name, String address, long bic,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bankLocalService.updateBank(
+			bankId, name, address, bic, serviceContext);
 	}
 
 	@Override
